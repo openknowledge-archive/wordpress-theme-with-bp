@@ -1,0 +1,161 @@
+/**
+ * Theme colour variations
+ */
+
+/**
+ * Blue
+ */
+@blue: #02a5e0;
+.theme-blue {
+
+	.header {
+		border-top-color: @blue;
+	}
+
+	.social-links a {
+		color: #333;
+	}
+
+	a,
+	a:hover,
+	.header a:hover {
+		color: @blue;
+	}
+
+	.okfn-wp-ribbon a {
+		background-position: center center;
+	}
+
+	#page-banner,
+	.post__category,
+	a.post__category {
+		background: @blue;
+		color: white;
+	}
+
+	.sidebar h3 {
+		border-color: @blue;
+	}
+
+	input[type=submit] {
+		background: @blue;
+		border-color: darken(@blue, 10%);
+
+		&:hover {
+			background: darken(@blue, 10%);
+			border-color: darken(@blue, 30%);
+		}
+	}
+
+	#page-banner-signup .form-control {
+
+		&:focus {
+			border-color: @blue;
+			box-shadow: none;
+		}
+	}
+}
+
+/**
+ * Red
+ */
+@red: #c7254e;
+.theme-red {
+
+	.header {
+		border-top-color: @red;
+	}
+
+	.social-links a {
+		color: #333;
+	}
+
+	a,
+	a:hover,
+	.header a:hover {
+		color: @red;
+	}
+
+	.okfn-wp-ribbon a {
+		background-position: center center;
+	}
+
+	#page-banner,
+	.post__category,
+	a.post__category {
+		background: @red;
+		color: white;
+	}
+
+	.sidebar h3 {
+		border-color: @red;
+	}
+
+	input[type=submit] {
+		background: @red;
+		border-color: darken(@red, 10%);
+
+		&:hover {
+			background: darken(@red, 10%);
+			border-color: darken(@red, 30%);
+		}
+	}
+
+	#page-banner-signup .form-control {
+
+		&:focus {
+			border-color: white;
+			box-shadow: none;
+		}
+	}
+}
+
+/**
+ * White
+ */
+@grey: #2d2d2d;
+.theme-white {
+
+	.header {
+		border-top-color: @grey;
+	}
+
+	a,
+	a:hover,
+	.header a:hover {
+		color: @grey;
+	}
+
+	.okfn-wp-ribbon a {
+		background-position: center center;
+	}
+
+	#page-banner,
+	.post__category,
+	a.post__category {
+		background: lighten(@grey, 0%);
+		color: white;
+	}
+
+	.sidebar h3 {
+		border-color: @grey;
+	}
+
+	input[type=submit] {
+		background: @grey;
+		border-color: darken(@grey, 10%);
+
+		&:hover {
+			background: darken(@grey, 10%);
+			border-color: darken(@grey, 30%);
+		}
+	}
+
+	#page-banner-signup .form-control {
+
+		&:focus {
+			border-color: white;
+			box-shadow: none;
+		}
+	}
+}
