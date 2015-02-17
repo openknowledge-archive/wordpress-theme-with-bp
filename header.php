@@ -6,6 +6,20 @@
  *
  * @package OKFNWP
  */
+
+// Get the theme options
+global $options;
+foreach ($options as $value) {
+  if(array_key_exists('id', $value)) {
+    if (get_option( $value['id'] ) === FALSE) {
+      if (array_key_exists('std', $value)) {
+        $$value['id'] = $value['std'] or NULL;
+      }
+    } else {
+      $$value['id'] = get_option( $value['id'] );
+    }
+  }
+}
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -30,8 +44,8 @@
 			</div>
 			<nav id="header-nav" role="navigation" class="hidden-xs">
 				<div id="nav-social" class="social-links">
-					<a class="facebook" href="http://www.facebook.com/OKFNetwork"><i class="fa fa-facebook fa-lg"></i></a>
-					<a class="twitter" href="https://twitter.com/okfn"><i class="fa fa-twitter fa-lg"></i></a>
+        <a class="facebook" href="http://www.facebook.com/<?php if($okfnwp_fb_id) { echo $okfnwp_fb_id; } else { echo "OKFNetwork"; } ?>"><i class="fa fa-facebook fa-lg"></i></a>
+					<a class="twitter" href="https://twitter.com/<?php if($okfnwp_twitter_id) { echo $okfnwp_twitter_id; } else { echo "okfn"; } ?>"><i class="fa fa-twitter fa-lg"></i></a>
 				</div>
 			</nav>
 		</div>
