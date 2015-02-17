@@ -30,7 +30,7 @@ $options = array(
   ),
   array(
     "name" => "Twitter Handle",
-    "desc" => "Twitter handle to link to. Example: @okfn",
+    "desc" => "Twitter handle to link to. Example: If your handle is @okfn, use okfn",
     "id"   => $shortname . "_twitter_id",
     "type" => "text"
   ),
