@@ -4,26 +4,17 @@
  */
 
 // Get the theme options
-global $options;
-foreach ($options as $value) {
-  if(array_key_exists('id', $value)) {
-    if (get_option( $value['id'] ) === FALSE) {
-      if (array_key_exists('std', $value)) {
-        $$value['id'] = $value['std'] or NULL;
-      }
-    } else {
-      $$value['id'] = get_option( $value['id'] );
-    }
-  }
-}
+$mailinglist_heading = get_option('okfnwp_mailinglist_heading');
+$mailinglist_action = get_option('okfnwp_mailinglist_action');
+$mailinglist_id = get_option('okfnwp_mailinglist_id');
 
-if(!empty($okfnwp_mailinglist_heading) && !empty($okfnwp_mailinglist_action)) {
+if(!empty($mailinglist_heading) && !empty($mailinglist_action)) {
 ?>
 <div id="page-banner-signup">
   <div class="container">
-    <form class="form-inline" role="form" action="<?php echo $okfnwp_mailinglist_action; ?>" method="post">
+    <form class="form-inline" role="form" action="<?php echo $mailinglist_action; ?>" method="post">
       <div class="page-banner-signup-label">
-        <?php echo $okfnwp_mailinglist_heading; ?>
+        <?php echo $mailinglist_heading; ?>
       </div>
       <div class="page-banner-signup-form">
         <div class="form-group">
@@ -34,7 +25,7 @@ if(!empty($okfnwp_mailinglist_heading) && !empty($okfnwp_mailinglist_action)) {
           <label class="sr-only" for="email">Email address:</label>
           <input type="email" class="form-control" name="email" placeholder="<?php echo __('email address', 'okfnwp'); ?>">
         </div>
-        <input type="hidden" name="list" value="<?php echo $okfnwp_mailinglist_id; ?>">
+        <input type="hidden" name="list" value="<?php echo $mailinglist_id; ?>">
         <button type="submit" class="btn btn-default">subscribe</button>
       </div>
     </form>
