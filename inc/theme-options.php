@@ -37,11 +37,10 @@ function okfnwp_add_admin() {
 			$options;
 
 	if($_GET['page'] == basename(__FILE__)) {
-
-		if ('save' == $_REQUEST['action']) {
+		if (array_key_exists('action', $_REQUEST) && 'save' == $_REQUEST['action']) {
 
 			foreach ($options as $value) {
-				update_option( $value['id'], $_REQUEST[ $value['id'] ] ); 
+				update_option( $value['id'], $_REQUEST[ $value['id'] ] );
 			}
 
 			foreach ($options as $value) {
@@ -58,7 +57,7 @@ function okfnwp_add_admin() {
 			header("Location: themes.php?page=theme-options.php&saved=true");
 			die;
 
-		} elseif('reset' == $_REQUEST['action']) {
+		} elseif(array_key_exists('action', $_REQUEST) && 'reset' == $_REQUEST['action']) {
 
 			foreach ($options as $value) {
 				delete_option($value['id']);
@@ -85,10 +84,10 @@ function okfnwp_admin() {
 
 	global $themename, $shortname, $options;
 
-	if($_REQUEST['saved']) {
+	if(array_key_exists('saved', $_REQUEST) && $_REQUEST['saved']) {
 		echo '<div id="message" class="updated fade"><p><strong>Settings saved.</strong></p></div>';
 	}
-	if($_REQUEST['reset']) {
+	if(array_key_exists('reset', $_REQUEST) && $_REQUEST['reset']) {
 		echo '<div id="message" class="updated fade"><p><strong>Settings reset.</strong></p></div>';
 	}
 
@@ -168,7 +167,7 @@ function okfnwp_admin() {
 
 				</div>
 
-			  <?php 
+			  <?php
 			  break;
 
 			case "title": ?>
@@ -186,8 +185,8 @@ function okfnwp_admin() {
 						<p class="explain"><?php echo $value['desc']; ?></p>
 					</div>
 					<div class="option">
-						<div class="controls">
-							<input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo get_option( $value['id'] ); } else { echo $value['std']; } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<? endif ?>/>
+            <div class="controls">
+							<input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo get_option( $value['id'] ); } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<? endif ?>/>
 							<br>
 						</div>
 						<div class="clear"></div>
