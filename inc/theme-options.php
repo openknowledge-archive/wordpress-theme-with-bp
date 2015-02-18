@@ -48,7 +48,7 @@ function okfnwp_add_admin() {
       $shortname,
       $options;
 
-  if($_GET['page'] == basename(__FILE__)) {
+  if(array_key_exists('page', $_GET) && $_GET['page'] == basename(__FILE__)) {
     if (array_key_exists('action', $_REQUEST) && 'save' == $_REQUEST['action']) {
 
       foreach ($options as $value) {
