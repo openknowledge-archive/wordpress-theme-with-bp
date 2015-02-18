@@ -14,8 +14,13 @@
   <title><?php wp_title( '|', true, 'right' ); ?></title>
   <link rel="profile" href="http://gmpg.org/xfn/11">
   <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-
   <?php wp_head(); ?>
+  <style type="text/css">
+  <?php if ( "true" == get_option('okfnwp_admin_bar', "true") ) { ?>
+  #wpadminbar {display:none; }
+  html {margin-top: 0px !important; }
+  <?php } ?>
+  </style>
 </head>
 
 <body <?php body_class(); ?>>

@@ -40,6 +40,14 @@ $options = array(
     "id"   => $shortname . "_fb_id",
     "type" => "text"
   ),
+  array(
+    "name"    => "Show TopBar?",
+    "desc"    => "Show / Hide the Wordpress Admin bar at the top of this site.",
+    "id"      => $shortname . "_admin_bar",
+    "type"    => "radio",
+    "options" => array("true" => "Hide", "false" => "Show"),
+    "std"     => "true"
+  ),
 );
 
 function okfnwp_add_admin() {
@@ -308,7 +316,7 @@ function okfnwp_admin() {
                   $checked = ' ';
                 }
 
-                if ($value['class'] == "thumbs") {
+                if (array_key_exists("class", $value) && $value['class'] == "thumbs") {
                   $bgimage = "".get_bloginfo('stylesheet_directory')."/screenshot-".$option_value.".png";
                 } else {
                   $bgimage = '';
