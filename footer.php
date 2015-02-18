@@ -20,19 +20,23 @@
     <div class="col-md-offset-2 col-md-3">
       <?php
         $menu = get_menu_by_location('footer-menu-1');
-        wp_nav_menu(array(
-          'theme_location' => 'footer-menu-1',
-          'items_wrap'     => '<h4>' . esc_html($menu->name) . '</h4><nav><ul>%3$s</ul></nav>'
-        ));
+        if ($menu) {
+          wp_nav_menu(array(
+            'theme_location' => 'footer-menu-1',
+            'items_wrap'     => '<h4>' . esc_html($menu->name) . '</h4><nav><ul>%3$s</ul></nav>'
+          ));
+        }
       ?>
     </div>
     <div class="col-md-3">
       <?php
         $menu = get_menu_by_location('footer-menu-2');
-        wp_nav_menu(array(
-          'theme_location' => 'footer-menu-2',
-          'items_wrap'     => '<h4>' . esc_html($menu->name) . '</h4><nav><ul>%3$s</ul></nav>'
-        ));
+        if ($menu) {
+          wp_nav_menu(array(
+            'theme_location' => 'footer-menu-2',
+            'items_wrap'     => '<h4>' . esc_html($menu->name) . '</h4><nav><ul>%3$s</ul></nav>'
+          ));
+        }
       ?>
     </div>
     <div class="col-md-3"></div>
