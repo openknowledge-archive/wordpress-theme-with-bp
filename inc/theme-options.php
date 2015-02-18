@@ -24,7 +24,7 @@ $options = array(
   ),
   array(
     "name" => "Mailman List ID",
-    "desc" => "",
+    "desc" => "For the list at http://lists.okfn.org/mailman/subscribe/XYZ, this should be XYZ",
     "id"   => $shortname . "_mailinglist_id",
     "type" => "text"
   ),
