@@ -189,11 +189,22 @@ function theme_color($classes) {
 add_filter('body_class', 'theme_color');
 
 // Show title on home page
-add_filter( 'wp_title', 'wp_title_for_home' );
-function wp_title_for_home( $title )
+add_filter('wp_title', 'wp_title_for_home', 10, 2);
+function wp_title_for_home( $title, $sep )
 {
-  if( empty( $title ) && ( is_home() || is_front_page() ) ) {
-    return __( 'Home', 'theme_domain' ) . ' | ' . get_bloginfo( 'description' );
-  }
+  global $paged, $page;
+
+  if ( is_feed() )
+    return $title;
+
+  $title .= get_bloginfo( 'name', 'display' );
+
+  $site_description = get_bloginfo( 'description', 'display' );
+  if ( $site_description && ( is_home() || is_front_page() ) )
+    $title = "$title $sep $site_description";
+
+  if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() )
+    $title = "$title $sep " . sprintf( __( 'Page %s', 'twentythirteen' ), max( $paged, $page ) );
+
   return $title;
 }
