@@ -1,7 +1,8 @@
 {
   "name": "okfn-wp",
   "dependencies": {
-	"bootstrap": "3.2.*",
-	"jquery": "1.11.*"
+    "bootstrap": "3.2.*",
+    "jquery": "1.11.*",
+    "fontawesome": "4.3.0"
   }
 }
