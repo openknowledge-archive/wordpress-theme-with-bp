@@ -8,14 +8,6 @@ body {
 
 
 /**
-  * Global container width
-  */
-.container {
-	width: 90%;
-}
-
-
-/**
  * OKFN Global header
  */
 #okf-panel {
@@ -162,6 +154,69 @@ body {
 	.row > div {
 		margin-bottom: 10px;
 	}
+}
+
+
+/**
+ * Blog
+ */
+ 
+.blog {
+  .post--blog {
+    .make-row();
+    text-align:center;
+    
+    .post__thumb {
+      display:block;
+      .make-sm-column(4);
+      
+      @media (min-width: @screen-sm-min) {
+        float:none !important;
+        display:table-cell;
+      }
+      
+      img {
+        border-radius:50%;
+        max-width:293px;
+        display:inline;
+      }
+    }
+    
+    .post--excerpt {
+      .make-sm-column(8);
+      
+      @media (min-width: @screen-sm-min) {
+        float:none !important;
+        display:table-cell;
+        vertical-align:middle;
+        text-align:left;
+      }
+      
+      h4 {
+        text-transform:uppercase;
+        font-size:28px;
+        line-height:1.2;
+        margin-bottom:2px;
+      }
+      
+      .post__meta {
+        font-size:14px;
+        
+        .post__category {
+          position:static;
+          color:inherit;
+          background-color:inherit;
+          padding:0;
+          font-style:italic;
+        }
+      }
+      
+      .more:extend(.btn) {
+        background-color:@okf-primary;
+        color:#fff;
+      }
+    }
+  }
 }
 
 

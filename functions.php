@@ -23,7 +23,7 @@ include('inc/theme-options.php');
 /**
  * Post thumbnails
  */
-set_post_thumbnail_size(570, 180, true);
+set_post_thumbnail_size(586, 586, true);
 add_image_size('small', 370, 180, true);
 
 
