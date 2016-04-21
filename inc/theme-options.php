@@ -178,7 +178,7 @@ function okfnwp_admin() {
 
       case "open": ?>
 
-        <div id="<?php echo $value['name']; ?>" class="group" <?php if( $active_tab !== $value['name'] ) : ?> style="display:none;"<? endif; ?> >
+        <div id="<?php echo $value['name']; ?>" class="group" <?php if( $active_tab !== $value['name'] ) : ?> style="display:none;"<?php endif; ?> >
 
         <?php
         break;
@@ -206,7 +206,7 @@ function okfnwp_admin() {
           </div>
           <div class="option">
             <div class="controls">
-              <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo get_option( $value['id'] ); } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<? endif ?>/>
+              <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo get_option( $value['id'] ); } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>/>
               <br>
             </div>
             <div class="clear"></div>
@@ -227,7 +227,7 @@ function okfnwp_admin() {
           </div>
           <div class="option">
             <div class="controls">
-              <textarea name="<?php echo $value['id']; ?>" cols="70" rows="<?php if (  $value['rows']  != "") { echo $value['rows']; } else { echo '5'; } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<? endif ?>><?php if ( get_option( $value['id'] ) != "") { echo $output; } else { echo $value['std']; } ?></textarea>
+              <textarea name="<?php echo $value['id']; ?>" cols="70" rows="<?php if (  $value['rows']  != "") { echo $value['rows']; } else { echo '5'; } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>><?php if ( get_option( $value['id'] ) != "") { echo $output; } else { echo $value['std']; } ?></textarea>
               <br>
             </div>
             <div class="clear"></div>
@@ -266,7 +266,7 @@ function okfnwp_admin() {
           </div>
           <div class="option">
             <div class="controls">
-              <input type="text" id="<?php echo $value['id']; ?>" name="<?php echo $value['id']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo get_option( $value['id'] ); } else { echo $value['std']; } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<? endif ?> />
+              <input type="text" id="<?php echo $value['id']; ?>" name="<?php echo $value['id']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo get_option( $value['id'] ); } else { echo $value['std']; } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?> />
               <!--<input id="<?php echo $value['id']; ?>_upload_button" type="button" class="button" value="<?php echo $upload_button_text; ?>" /> -->
               <br>
             </div>
@@ -286,7 +286,7 @@ function okfnwp_admin() {
           </div>
           <div class="option">
             <div class="controls">
-              <? if( get_option($value['id'] ) ){ $checked = "checked=\"checked\""; } else { if ( $value['std'] === "true" ){ $checked = "checked=\"checked\""; } else { $checked = ""; } } ?>
+              <?php if( get_option($value['id'] ) ){ $checked = "checked=\"checked\""; } else { if ( $value['std'] === "true" ){ $checked = "checked=\"checked\""; } else { $checked = ""; } } ?>
               <input type="checkbox" name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" value="true" <?php echo $checked; ?> />
               <label for="<?php echo $value['id']; ?>" class="explain"><?php echo $value['desc']; ?></label>
             </div>
@@ -306,7 +306,7 @@ function okfnwp_admin() {
           </div>
           <div class="option">
             <div class="controls">
-              <? foreach ($value['options'] as $option_value => $option_text) {
+              <?php foreach ($value['options'] as $option_value => $option_text) {
                 $checked = ' ';
                 if (get_option($value['id']) == $option_value) {
                   $checked = ' checked="checked" ';
