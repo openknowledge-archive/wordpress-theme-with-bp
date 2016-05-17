@@ -6,8 +6,8 @@
  */
 ?>
 
-	<div class="sidebar col-md-4">
-		<ul>
-			<?php dynamic_sidebar('sidebar'); ?>
-		</ul>
-	</div>
+<div class="sidebar col-md-4">
+  <ul>
+    <?php dynamic_sidebar('sidebar'); ?>
+  </ul>
+</div>
