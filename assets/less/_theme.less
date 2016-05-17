@@ -9,10 +9,11 @@ body {
 
 /**
   * Global container width
+  Not required if the theme should not be full-width.
   */
-.container {
+/*.container {
 	width: 90%;
-}
+}*/
 
 
 /**
@@ -223,6 +224,11 @@ body {
 	}
 	.post__meta {
 		color: #969696;
+        
+        /*Make the FontAwesome icon a bit more separated from the text*/
+        .fa{
+          margin-right: @padding-small-vertical;
+        }
 	}
 	.entry-content {
 
