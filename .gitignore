@@ -6,3 +6,6 @@ bower_components/
 
 # Misc files types
 *.DS_Store
+
+# NetBeans project files
+nbproject/
