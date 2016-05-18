@@ -50,14 +50,21 @@ function paging_nav() {
 }
 
 function breadcrumbs() {
+
+    // Don't show breadcrumbs on the Home page
+    if (is_home()):
+        return;
+    endif;
+
     global $post;
     echo '<ul class="breadcrumb">';
 
     echo '<li><a href="' . home_url() . '">Home</a></li>';
 
-    if (!is_page() && !is_404()) :
-        echo '<li><a href="' . get_permalink(get_option('page_for_posts')) . '">' . __('Blog', 'okfn') . '</a></li>';
-    endif;
+    // Temporarily disable this link in the breadcrumbs
+    //if (!is_page() && !is_404()) :
+    //    echo '<li><a href="' . get_permalink(get_option('page_for_posts')) . '">' . __('Blog', 'okfn') . '</a></li>';
+    //endif;
 
     if (is_404()) :
         echo '<li>' . __('Page not found', 'okfnwp') . '</li>';
@@ -102,7 +109,7 @@ function breadcrumbs() {
     elseif (is_author()) :
         echo '<li>Author Archive</li>';
 
-    elseif (isset($_GET['paged']) && !empty($_GET['paged'])) :
+    elseif (get_query_var('paged') && !empty(get_query_var('paged'))) :
         echo '<li>Blog Archives</li>';
 
     elseif (is_search()) :
