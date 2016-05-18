@@ -15,13 +15,18 @@
     <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/favicon.ico" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-    <?php wp_head(); ?>
-    <style type="text/css">
-<?php if ("true" == get_option('okfnwp_admin_bar', "true")) { ?>
+    <?php
+    wp_head();
+
+    // Render the WordPress admin bar according to the
+    // "Show TopBar?" setting in Theme options.
+    if ("true" == get_option('okfnwp_admin_bar', "true")) {
+        ?>
+        <style type="text/css">
           #wpadminbar {display:none; }
           html {margin-top: 0px !important; }
-<?php } ?>
-    </style>
+        </style>
+    <?php } ?>
   </head>
 
   <body <?php body_class(); ?>>
