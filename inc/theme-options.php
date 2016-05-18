@@ -206,7 +206,7 @@ function okfnwp_admin() {
           </div>
           <div class="option">
             <div class="controls">
-              <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( get_option( $value['id'] ) != "") { echo get_option( $value['id'] ); } ?>" <?php if (  $value['placeholder']  != "") : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>/>
+              <input name="<?php echo $value['id']; ?>" id="<?php echo $value['id']; ?>" type="<?php echo $value['type']; ?>" value="<?php if ( !empty(get_option( $value['id'] ))) { echo get_option( $value['id'] ); } ?>" <?php if ( !empty($value['placeholder'])) : ?>placeholder="<?php echo $value['placeholder']; ?>"<?php endif ?>/>
               <br>
             </div>
             <div class="clear"></div>
