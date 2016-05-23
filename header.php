@@ -11,7 +11,6 @@
   <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php wp_title('|', true, 'right'); ?></title>
     <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/favicon.ico" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
@@ -90,20 +89,36 @@
           <img src="<?php header_image(); ?>" alt="">
         </section>
 
+    <?php elseif (is_front_page()) : ?>
+
     <?php else : ?>
 
         <div id="page-banner">
           <div class="container">
             <h1>
               <?php
+              $blog_title = __('Blog', 'okfnwp');
+              $error_404_title = __('Page Not Found', 'okfnwp');
+              $search_title = sprintf(__('Search Results for: %1$s', 'okfnwp'), get_search_query());
+
               if (is_single() || is_page()) :
                   the_title();
-              elseif (is_archive() || is_category() || is_home()) :
-                  echo __('Blog', 'okfnwp');
+              elseif (is_archive() || is_category()) :
+                  echo $blog_title;
+
+              // When loading the latest posts page or a static home page
+              // load the title dynamically from the page title, if set.
+              elseif (is_home()) :
+                  $dynamic_title = get_the_title(get_option('page_for_posts'));
+                  if (isset($dynamic_title)) :
+                      echo $dynamic_title;
+                  else :
+                      echo $blog_title;
+                  endif;
               elseif (is_404()) :
-                  echo __('Page Not Found', 'okfnwp');
+                  echo $error_404_title;
               elseif (is_search()) :
-                  echo sprintf(__('Search Results for: %1$s', 'okfnwp'), get_search_query());
+                  echo $search_title;
               endif;
               ?>
             </h1>
