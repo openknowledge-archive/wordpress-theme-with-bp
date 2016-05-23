@@ -1,5 +1,5 @@
 <?php
-/** 
+/**
  * The template for displaying the latests posts or a static home page.
  * 
  * @package OKFNWP
@@ -8,7 +8,7 @@ get_header();
 ?>
 
 <div class="main col-md-8">
-  <?php 
+  <?php
   if (have_posts()):
       ?>
       <div class="row">
@@ -18,12 +18,11 @@ get_header();
             // Include the page content template.
             get_template_part('content', 'blog');
         endwhile;
-
-        // Previous/next post navigation.
-        paging_nav();
         ?>
       </div>
       <?php
+      // Previous/next post navigation.
+      paging_nav();
   else:
       get_template_part('content', 'none');
   endif;
