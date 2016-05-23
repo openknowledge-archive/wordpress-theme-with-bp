@@ -86,11 +86,11 @@
   margin: 20px 0;
 
   #header-brand {
-    .make-sm-column(6);
+    .make-sm-column(8);
   }
 
   #header-nav {
-    .make-sm-column(6);
+    .make-sm-column(4);
     text-align: right;
   }
 
@@ -136,6 +136,32 @@
   border: none;
   text-transform: lowercase;
   margin-bottom: 0;
+
+  .navbar-form{
+    &:extend(.navbar-right);
+
+    border: none;
+
+    .input-group-search {
+      width: 300px;
+      .input-group-btn .btn {
+        color: @okf-darkgrey;
+        background: transparent;
+        border-color: @okf-midgrey;
+        border-left-color: transparent;
+      }
+    }
+
+    .form-control {
+      border-color: @okf-midgrey;
+      border-right-color:@navbar-default-bg;
+    }
+    .form-control:focus {
+      box-shadow: none;
+      background-color: #fff;
+      border-right-color: fadeout(@okf-darkgrey, 90%);
+    }
+  }
 }
 
 // Align the first nav item with the grid.
@@ -320,36 +346,6 @@ html.wf-lato-n7-active {
   }
 }
 
-/*Widgets*/
-.widget_tag_cloud{    
-  .tagcloud{
-    padding-top: @padding-small-vertical;
-    padding-bottom: @padding-small-vertical;
-  }
-}
-
-.widget_rss{
-  
-  /*Reset the color of the widget title anchor*/
-  .widgettitle a{
-    color: inherit;
-  }
-
-  /*Float the RSS feed icon to the right side of the WordPress widget title*/
-  .rss-widget-icon{
-    float: right;
-  }
-}
-
-/* Make any select dropdown in the Sidebar archive widgets as if it had
-the .form-control class assigned */
-.widget_archive{
-  select{
-    margin-top: @padding-large-vertical;
-    &:extend(.form-control);
-  }
-}
-
 .navbar-collapse {
   // By default, Bootstrap sets max-height: 340px, which causes the nav to
   // overflow and display a scrollbar. No thank you.
@@ -361,27 +357,27 @@ the .form-control class assigned */
 }
 
 .navbar-form {
-  border: none;
-
-  .input-group-search {
-    width: 300px;
-    .input-group-btn .btn {
-      color: @okf-darkgrey;
-      background: transparent;
-      border-color: @okf-midgrey;
-      border-left-color: transparent;
+  /*  border: none;
+  
+    .input-group-search {
+      width: 300px;
+      .input-group-btn .btn {
+        color: @okf-darkgrey;
+        background: transparent;
+        border-color: @okf-midgrey;
+        border-left-color: transparent;
+      }
     }
-  }
-
-  .form-control {
-    border-color: @okf-midgrey;
-    border-right-color:@navbar-default-bg;
-  }
-  .form-control:focus {
-    box-shadow:none;
-    background-color:#fff;
-    border-right-color: fadeout(@okf-darkgrey, 90%);
-  }
+  
+    .form-control {
+      border-color: @okf-midgrey;
+      border-right-color:@navbar-default-bg;
+    }
+    .form-control:focus {
+      box-shadow:none;
+      background-color:#fff;
+      border-right-color: fadeout(@okf-darkgrey, 90%);
+    }*/
 
   @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
     .input-group-search, .form-control {
