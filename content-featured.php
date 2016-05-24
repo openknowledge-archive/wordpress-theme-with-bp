@@ -26,3 +26,5 @@ $categories = get_the_category();
   <?php the_excerpt(); ?>
   <a href="<?php the_permalink(); ?>"><?php _e('Read more'); ?></a>
 </div>
+<?php
+okfn_save_rendered_post_id($post);
