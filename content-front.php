@@ -3,8 +3,6 @@
  * @package OKFNWP
  */
 $categories = get_the_category();
-
-//TO DO: Make sure images are rendered for all posts even if no featured image is set
 ?>
 <div class="col-md-6 post--blog post--excerpt">
   <?php
@@ -12,7 +10,7 @@ $categories = get_the_category();
       ?>
       <div class="post__thumb">
         <?php
-        echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail($post, 'large') . '</a>';
+        echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail($post, 'small') . '</a>';
 
         if ($categories) :
             echo sprintf('<a href="%1$s" class="post__category">%2$s</a>', get_category_link($categories[0]->term_id), $categories[0]->name);
