@@ -23,6 +23,8 @@ $categories = get_the_category();
   ?>
   <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
   <p class="post__meta"><i class="fa fa-calendar"></i> <?php echo sprintf(__('Posted %1$s'), get_the_time('jS F Y')); ?></p>
-  <?php the_excerpt(); ?>
-  <a href="<?php the_permalink(); ?>"><?php _e('Read more'); ?></a>
+  <?php
+  the_excerpt();
+  okfn_read_more_btn();
+  ?>
 </div>
