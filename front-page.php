@@ -13,10 +13,7 @@ get_header();
   <?php
   // TO DO: Think of a way for setting this value fixed from the Theme Options
   // in the WordPress admin.
-
-  if (!empty($okfn_home_featured)) {
-      $featured_cat = $okfn_home_featured;
-  } else {
+  if (!isset($featured_cat)) {
       $featured_cat = 'Featured';
   }
 
