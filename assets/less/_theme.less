@@ -2,11 +2,6 @@
  * Theme styles
  */
 
-body {
-  font-family: Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-
 /**
   * Global container width
   Not required if the theme should not be full-width.
@@ -69,7 +64,8 @@ body {
  * Navigation
  */
 .nav {
-  position: relative; z-index: 101;
+  position: relative;
+  z-index: 101;
 }
 .navbar-default .navbar-nav > .current-menu-item > a {
   color: #8e8e8e;
@@ -85,7 +81,9 @@ body {
   display: none;
   margin: 0;
   padding: 0;
-  position: absolute; top: 100%; left: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
 
   // Is visible
   @media (min-width: @screen-sm-min) {
@@ -231,7 +229,9 @@ body {
   color: #fff;
   font-style: 11px;
   padding: 4px 7px;
-  position: absolute; bottom: 0; right: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 
   &:hover {
     color: #fff;
@@ -352,7 +352,8 @@ dd {
  * Latest posts listing
  */
 .list-posts {
-  border: 1px dotted darken(#f0f0f0, 20%); border-width: 1px 0;
+  border: 1px dotted darken(#f0f0f0, 20%);
+  border-width: 1px 0;
   margin: 30px 0;
   padding: 30px 0 1px;
 
@@ -501,13 +502,13 @@ dd {
   .input-group-search{
     width: 100%;
   }
-  
+
   .navbar-form{
     @media (min-width: @screen-sm-min){
-    padding-left: 0;
-    padding-right: 0;      
+      padding-left: 0;
+      padding-right: 0;      
     }
-    
+
     .input-group {
       .input-group-btn{
         width: 0;
