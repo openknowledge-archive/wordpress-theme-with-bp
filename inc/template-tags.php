@@ -118,3 +118,9 @@ function breadcrumbs() {
 
     echo '</ul>';
 }
+
+function okfn_read_more_btn() {
+    ?>
+    <a class="btn btn-sm btn-default" href="<?php the_permalink(); ?>"><?php _e('Read more', 'okfnwp'); ?></a>
+    <?php
+}
