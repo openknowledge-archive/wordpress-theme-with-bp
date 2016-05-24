@@ -1,29 +1,91 @@
 <?php
-
-/**
- * OKFNWP functions and definitions
- *
- * @package OKFNWP
+/*
+ * Initialize the OKFN WordPress theme and set up several required options
  */
-/**
- * Add theme support for features
- */
-add_theme_support('html5');
-add_theme_support('menus');
-add_theme_support('post-thumbnails');
 
+function okfn_theme_setup() {
+
+    /**
+     * OKFNWP functions and definitions
+     *
+     * @package OKFNWP
+     */
+    /**
+     * Add theme support for features
+     */
+    add_theme_support('html5');
+    add_theme_support('menus');
+    add_theme_support('post-thumbnails');
+
+    /**
+     * Post thumbnails
+     */
+    set_post_thumbnail_size(570, 180, true);
+    add_image_size('small', 370, 180, true);
+
+    /*
+     * Let WordPress manage the document title.
+     * By adding theme support, we declare that this theme does not use a
+     * hard-coded <title> tag in the document head, and expect WordPress to
+     * provide it for us.
+     */
+    add_theme_support('title-tag');
+
+    /**
+     * Custom header image
+     */
+    add_theme_support('custom-header', array(
+        'flex-width' => true,
+        'width' => 1200,
+        'flex-height' => true,
+        'height' => 300,
+        'header-text' => false
+    ));
+
+    /**
+     * Register menus
+     */
+    register_nav_menus(array(
+        'primary' => 'Primary',
+        'footer-menu-1' => 'Footer Menu 1',
+        'footer-menu-2' => 'Footer Menu 2'
+    ));
+}
+
+add_action('after_setup_theme', 'okfn_theme_setup');
+
+function okfn_widgets_init() {
+    /**
+     * Register sidebars
+     */
+    register_sidebar(array(
+        'name' => 'Sidebar',
+        'id' => 'sidebar',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget' => '</li>',
+        'before_title' => '<h3 class="widgettitle">',
+        'after_title' => '</h3>'
+    ));
+}
+
+add_action('widgets_init', 'okfn_widgets_init');
+
+// Backwards compatibility function for Title Tag theme support
+if (!function_exists('_wp_render_title_tag')) :
+
+    function theme_slug_render_title() {
+        ?>
+        <title><?php wp_title('|', true, 'right'); ?></title>
+        <?php
+    }
+
+    add_action('wp_head', 'theme_slug_render_title');
+endif;
 
 /**
  * Add theme Options page
  */
-include('inc/theme-options.php');
-
-
-/**
- * Post thumbnails
- */
-set_post_thumbnail_size(570, 180, true);
-add_image_size('small', 370, 180, true);
+require 'inc/theme-options.php';
 
 /**
  * Remove height and width attributes from images
@@ -40,48 +102,13 @@ add_filter('image_send_to_editor', 'remove_width_attribute', 10);
 /**
  * Shortcodes
  */
-include('inc/latest-posts.php');
+require 'inc/latest-posts.php';
 
 
 /**
  * Template tags
  */
-include('inc/template-tags.php');
-
-
-/**
- * Custom header image
- */
-add_theme_support('custom-header', array(
-    'flex-width' => true,
-    'width' => 1200,
-    'flex-height' => true,
-    'height' => 300,
-    'header-text' => false
-));
-
-
-/**
- * Register sidebars
- */
-register_sidebar(array(
-    'name' => 'Sidebar',
-    'id' => 'sidebar',
-    'before_widget' => '<li id="%1$s" class="widget %2$s">',
-    'after_widget' => '</li>',
-    'before_title' => '<h3 class="widgettitle">',
-    'after_title' => '</h3>'
-));
-
-
-/**
- * Register menus
- */
-register_nav_menus(array(
-    'primary' => 'Primary',
-    'footer-menu-1' => 'Footer Menu 1',
-    'footer-menu-2' => 'Footer Menu 2'
-));
+require 'inc/template-tags.php';
 
 /**
  * Enqueue stylesheets
@@ -195,4 +222,73 @@ function wp_title_for_home($title, $sep) {
     }
 
     return $title;
+}
+
+/*
+ * Remove the content editor for the page which is set as a Front page to make it
+ * obvious that the page content shouldn't be editted. 
+ */
+
+add_action('edit_form_after_title', 'okfn_front_page_editor_notice');
+
+function okfn_front_page_editor_notice() {
+    $page_on_front = get_option('page_on_front');
+    global $post;
+
+    if (isset($page_on_front) && $page_on_front === $post->ID) {
+        remove_post_type_support('page', 'editor');
+        ?>
+        <div class="notice notice-warning inline">
+          <p><?php _e('You are currently editing the page that shows your front page content.', 'okfnwp'); ?></p>
+        </div>
+        <?php
+    }
+}
+
+/* Define some useful global variables */
+
+function okfn_global_vars() {
+
+    global $featured_cats;
+    global $rendered_posts_ids;
+
+    $rendered_posts_ids = [];
+}
+
+add_action('after_setup_theme', 'okfn_global_vars');
+
+function okfn_get_featured_cats() {
+    global $featured_cats;
+
+    if (!isset($featured_cats)):
+        $featured_cats = [];
+    endif;
+
+    $okfn_recent_posts = get_posts(['posts_per_page' => 20, 'post_type' => 'post', 'post_status' => 'publish', 'fields' => 'ids', 'orderby' => 'date_modified']);
+    foreach ($okfn_recent_posts as $value):
+        $featured_cats = array_unique(array_merge($featured_cats, wp_get_post_terms($value, 'category', ['orderby' => 'count', 'fields' => 'ids'])));
+    endforeach;
+}
+
+add_action('wp_head', 'okfn_get_featured_cats');
+
+// When a post is rendered in a template, remember its ID, so that no duplicate
+// post appear in the listings.
+function okfn_save_rendered_post_id($post) {
+    global $rendered_posts_ids;
+
+    if (!in_array($post->ID, $rendered_posts_ids)):
+        array_push($rendered_posts_ids, $post->ID);
+    endif;
+}
+
+// Check if a post has not already been rendered in the loop
+function okfn_is_post_rendered($post) {
+    global $rendered_posts_ids;
+
+    if (in_array($post->ID, $rendered_posts_ids)):
+        return true;
+    else:
+        return false;
+    endif;
 }
