@@ -13,6 +13,8 @@ $categories = get_the_category();
         echo '<a href="' . get_permalink() . '">' . get_the_post_thumbnail($post, 'small') . '</a>';
 
         if ($categories) :
+            
+            // TO DO : What happens if the rendered category is the same in the previous post?            
             echo sprintf('<a href="%1$s" class="post__category">%2$s</a>', get_category_link($categories[0]->term_id), $categories[0]->name);
         endif;
         ?>
