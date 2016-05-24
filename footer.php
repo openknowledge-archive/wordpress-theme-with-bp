@@ -13,11 +13,11 @@
 <?php get_template_part('inc/mailing-bar'); ?>
 <footer class="footer"><div class="container">
     <div class="row">
-      <div class="col-md-4 copyright">
+      <div class="col-md-5 copyright">
         <p><a href="https://github.com/okfn/wordpress-theme/" title="Site source code"><i class="fa fa-code fa-lg fa-fw"></i> Source code</a> available under the MIT license.</p>
         <img src="<?php echo get_template_directory_uri(); ?>/assets/img/cc-by-sa.png" alt="Creative Commons Licence">
       </div>
-      <div class="col-md-offset-2 col-md-3">
+      <div class="col-md-offset-1 col-md-3">
         <?php
         $menu = get_menu_by_location('footer-menu-1');
         if (!is_wp_error($menu)) {
@@ -39,7 +39,6 @@
         }
         ?>
       </div>
-      <div class="col-md-3"></div>
     </div>
   </div></footer>
 <?php wp_footer(); ?>
