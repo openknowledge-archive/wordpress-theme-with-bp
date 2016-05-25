@@ -150,6 +150,9 @@
         background: transparent;
         border-color: @okf-midgrey;
         border-left-color: transparent;
+        // Fixes a bug in Firefox (v. 27 and posibly others) which cause buttons
+        // to render at a slightly incorrect/larger height.
+        height: @input-height-base;
       }
     }
 
@@ -277,12 +280,27 @@
 
 #breadcrumb {
   background-color: @breadcrumb-bg;
+
   .breadcrumb {
+    overflow: auto;
     padding-left: 0;
     padding-right: 0;
     margin-top: 0;
     margin-bottom: 0;
     background-color: transparent;
+    
+    > li{
+      float: left;
+      display: inline;
+    }
+  }
+
+  // Trims the long title text of the .breadcrumb last <li> element
+  li:last-child{
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -340,9 +358,8 @@ html.wf-lato-n7-active {
     list-style: none;
     padding-left: 0;
 
-    & > li {
-      border-bottom: 1px dotted @okf-lightgrey;
-      line-height: 1.6em;
+    & > li:not(:last-child) {
+      border-bottom: @okf-post-border;
     }
   }
 }

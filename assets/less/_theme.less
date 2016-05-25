@@ -2,6 +2,8 @@
  * Theme styles
  */
 
+@okf-post-border: 1px solid darken(@okf-lightgrey, 10%);
+
 /**
   * Global container width
   Not required if the theme should not be full-width.
@@ -168,7 +170,7 @@
  * Postbit
  */
 .post {
-  border-bottom: 1px dotted darken(#f0f0f0, 20%);
+  border-bottom: @okf-post-border;
   margin-bottom: 30px;
   padding-bottom: 20px;
 
@@ -207,7 +209,7 @@
   }
 }
 .post__thumb {
-  background-color: #F0F0F0;
+  background-color: @okf-lightgrey;
   position: relative;
   overflow: hidden;
   min-height: 180px;
@@ -333,7 +335,7 @@ dd {
  */
 
 .author-info {
-  background: #eaeaea;
+  background: @okf-lightgrey;
   padding: 15px;
   margin: 40px 0;
 
@@ -352,7 +354,7 @@ dd {
  * Latest posts listing
  */
 .list-posts {
-  border: 1px dotted darken(#f0f0f0, 20%);
+  border: @okf-post-border;
   border-width: 1px 0;
   margin: 30px 0;
   padding: 30px 0 1px;
@@ -371,7 +373,7 @@ dd {
  * Pagination
  */
 .blog-pagination {
-  border-top: 1px dotted darken(#f0f0f0, 20%);
+  border-top: @okf-post-border;
   clear: both;
   margin-top: 25px;
   padding-top: 15px;
@@ -494,6 +496,11 @@ dd {
   /*Float the RSS feed icon to the right side of the WordPress widget title*/
   .rss-widget-icon{
     float: right;
+  }
+  
+  li{
+    padding-top: @padding-small-vertical;
+    padding-bottom: @padding-small-vertical;
   }
 }
 
