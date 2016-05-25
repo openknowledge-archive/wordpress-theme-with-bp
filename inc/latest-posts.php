@@ -38,8 +38,10 @@ function latest_posts($atts) {
               endif;
               ?>
               <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-              <?php the_excerpt(); ?>
-              <a href="<?php the_permalink(); ?>"><?php _e('Read more'); ?></a>
+              <?php
+              the_excerpt();
+              okfn_read_more_btn();
+              ?>
             </div>
             <?php
         endwhile;
