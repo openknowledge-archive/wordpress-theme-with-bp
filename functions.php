@@ -1,4 +1,10 @@
 <?php
+
+/**
+ * Add theme Options page
+ */
+require_once ('inc/theme-options.php');
+
 /*
  * Initialize the OKFN WordPress theme and set up several required options
  */
@@ -49,7 +55,7 @@ function okfn_theme_setup() {
         'primary' => 'Primary',
         'footer-menu-1' => 'Footer Menu 1',
         'footer-menu-2' => 'Footer Menu 2'
-    ));
+    ));   
 }
 
 add_action('after_setup_theme', 'okfn_theme_setup');
@@ -83,11 +89,6 @@ if (!function_exists('_wp_render_title_tag')) :
 endif;
 
 /**
- * Add theme Options page
- */
-require 'inc/theme-options.php';
-
-/**
  * Remove height and width attributes from images
  */
 function remove_width_attribute($html) {
@@ -102,13 +103,13 @@ add_filter('image_send_to_editor', 'remove_width_attribute', 10);
 /**
  * Shortcodes
  */
-require 'inc/latest-posts.php';
+require_once ('inc/latest-posts.php');
 
 
 /**
  * Template tags
  */
-require 'inc/template-tags.php';
+require_once ('inc/template-tags.php');
 
 /**
  * Enqueue stylesheets
@@ -249,9 +250,9 @@ function okfn_front_page_editor_notice() {
 
 function okfn_global_vars() {
 
-    global $featured_cats;
+    global $featured_cats;   
+    
     global $rendered_posts_ids;
-
     $rendered_posts_ids = [];
 }
 

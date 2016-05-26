@@ -3,9 +3,9 @@
  * Newsletter signup bar
  */
 // Get the theme options
-$mailinglist_heading = get_option('okfnwp_mailinglist_heading');
-$mailinglist_action = get_option('okfnwp_mailinglist_action');
-$mailinglist_id = get_option('okfnwp_mailinglist_id');
+$mailinglist_heading = get_option('theme_options_option_name')['okfnwp_mailinglist_heading'];
+$mailinglist_action = get_option('theme_options_option_name')['okfnwp_mailinglist_action'];
+$mailinglist_id = get_option('theme_options_option_name')['okfnwp_mailinglist_id'];
 
 if (!empty($mailinglist_heading) && !empty($mailinglist_action)) :
     ?>

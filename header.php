@@ -14,20 +14,8 @@
     <link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri(); ?>/assets/img/favicon.ico" />
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
-    <?php
-    wp_head();
-
-    // Render the WordPress admin bar according to the
-    // "Show TopBar?" setting in Theme options.
-    if ("true" == get_option('okfnwp_admin_bar', "true")) {
-        ?>
-        <style type="text/css">
-          #wpadminbar {display:none; }
-          html {margin-top: 0px !important; }
-        </style>
-    <?php } ?>
+    <?php wp_head(); ?>
   </head>
-
   <body <?php body_class(); ?>>
     <?php do_action('okf_panel'); ?>
     <header class="header">
@@ -39,8 +27,8 @@
         </div>
         <nav id="header-nav" role="navigation" class="hidden-xs">
           <div id="nav-social" class="social-links">
-            <a class="facebook" href="https://www.facebook.com/<?php echo get_option('okfnwp_fb_id', 'OKFNetwork'); ?>"><i class="fa fa-facebook fa-lg"></i></a>
-            <a class="twitter" href="https://twitter.com/<?php echo get_option('okfnwp_twitter_id', 'okfn'); ?>"><i class="fa fa-twitter fa-lg"></i></a>
+            <a class="facebook" href="https://www.facebook.com/<?php echo get_option('theme_options_option_name', 'OKFNetwork')['okfnwp_fb_id']; ?>"><i class="fa fa-facebook fa-lg"></i></a>
+            <a class="twitter" href="https://twitter.com/<?php echo get_option('theme_options_option_name', 'okfn')['okfnwp_twitter_id']; ?>"><i class="fa fa-twitter fa-lg"></i></a>
           </div>
         </nav>
         <div class="okfn-wp-ribbon">
@@ -67,7 +55,7 @@
               'container' => '',
               'fallback_cb' => false
           ));
-          
+
           get_search_form();
           ?>
         </div>
