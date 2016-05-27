@@ -119,8 +119,16 @@ function breadcrumbs() {
     echo '</ul>';
 }
 
+// Render a single Read more anchor
 function okfn_read_more_btn() {
     ?>
     <a href="<?php the_permalink(); ?>"><?php _e('Read more', 'okfnwp'); ?></a>
     <?php
+}
+
+// Backwards compatible function for rendering custom theme logos, where supported
+function okfn_theme_logo() {
+	if ( function_exists( 'the_custom_logo' ) ) {
+		the_custom_logo();
+	}
 }

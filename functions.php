@@ -20,6 +20,7 @@ function okfn_theme_setup() {
      */
     add_theme_support('html5');
     add_theme_support('menus');
+    add_theme_support('custom-logo', ['height' => 50, 'flex-width'  => true, 'header-text' => array( 'site-title', 'site-description' )]);
     add_theme_support('post-thumbnails');
 
     /**

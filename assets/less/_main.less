@@ -93,7 +93,7 @@
   margin: 20px 0;
 
   #header-brand {
-    /*.make-sm-column(8);*/
+    overflow: auto;
   }
 
   #header-nav {
@@ -108,15 +108,22 @@
 
   h1 {
     margin: 0;
-    padding: @header-padding 0 @header-padding 60px;
+    padding: @header-padding 0 @header-padding @jumbotron-padding*2;
     font-size: @header-font-size;
-    font-weight: bold;
+    font-weight: 700;
     line-height: 1em;
-    background: transparent url(assets/img/okf-logo-header-2x.png) left center no-repeat;
-    background-size: auto 50px;
     text-transform: uppercase;
     letter-spacing: 0.23em;
   }
+
+}
+
+.custom-logo-link{
+  &:extend(.pull-left);
+}
+
+.custom-logo{
+  max-width: 50px;
 }
 
 #nav-secondary {
@@ -335,7 +342,7 @@
     width: @ofn-footer-svg-size;
     height: @ofn-footer-svg-size;
   }
-  
+
   .license{
     vertical-align: middle;
     text-decoration: none;

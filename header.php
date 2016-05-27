@@ -22,9 +22,8 @@
       <div class="container">
         <div class="col-sm-7 col-md-8">
           <div id="header-brand">
-            <a href="/">
-              <h1><?php echo bloginfo('name'); ?></h1>
-            </a>
+            <?php okfn_theme_logo(); ?>            
+            <h1><a rel="home" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
           </div>
         </div>
         <div class="col-sm-5 col-md-4">
