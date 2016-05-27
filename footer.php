@@ -11,36 +11,57 @@
 </div><!-- / .row -->
 </div></main>
 <?php get_template_part('inc/mailing-bar'); ?>
-<footer class="footer"><div class="container">
-    <div class="row">
-      <div class="col-md-5 copyright">
-        <p><a href="https://github.com/okfn/wordpress-theme/" title="Site source code"><i class="fa fa-code fa-lg fa-fw"></i> Source code</a> available under the MIT license.</p>
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/cc-by-sa.png" alt="Creative Commons Licence">
+<footer class="footer">
+  <div class="container">
+    <div class="row footer-primary">
+      <div class="col-sm-3 col-md-2">
+        <a class="footer-logo" href="https://okfn.org/">
+          <img src="https://a.okfn.org/img/oki/landscape-white-468x122.png" alt="Open Knowledge International">
+        </a>
       </div>
-      <div class="col-md-offset-1 col-md-3">
+      <div class="col-sm-9 col-md-10">
         <?php
         $menu = get_menu_by_location('footer-menu-1');
         if (!is_wp_error($menu)) {
             wp_nav_menu(array(
                 'theme_location' => 'footer-menu-1',
-                'items_wrap' => '<h4>' . esc_html($menu->name) . '</h4><nav><ul>%3$s</ul></nav>'
-            ));
-        }
-        ?>
-      </div>
-      <div class="col-md-3">
-        <?php
-        $menu = get_menu_by_location('footer-menu-2');
-        if (!is_wp_error($menu)) {
-            wp_nav_menu(array(
-                'theme_location' => 'footer-menu-2',
-                'items_wrap' => '<h4>' . esc_html($menu->name) . '</h4><nav><ul>%3$s</ul></nav>'
+                'container' => 'nav',
+                'container_class' => 'footer-menu',
+                'items_wrap' => '<ul class="list-inline">%3$s</ul>'
             ));
         }
         ?>
       </div>
     </div>
-  </div></footer>
+    <div class="footer-secondary">
+      <p>
+        <a href='https://github.com/okfn/wordpress-theme/'
+           title='Site source code'>
+          <i class='fa fa-code fa-lg fa-fw'></i> Source code
+        </a>
+        available under the MIT license.
+      </p>
+      <p>
+        <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+          <?php echo file_get_contents(get_stylesheet_directory() . "/assets/img/cc.svg", FILE_USE_INCLUDE_PATH); ?>
+          <?php echo file_get_contents(get_stylesheet_directory() . "/assets/img/by.svg", FILE_USE_INCLUDE_PATH); ?>
+        </a>
+        Content on this site, made by
+        <a xmlns:cc="http://creativecommons.org/ns#"
+           href="https://okfn.org/"
+           property="cc:attributionName"
+           rel="cc:attributionURL">Open Knowledge International</a>, is licensed under a
+        <a rel="license"
+           href="https://creativecommons.org/licenses/by/4.0/">Creative Commons
+          Attribution 4.0 International License</a>.
+      </p>
+      <p>
+        Refer to our <a href="https://okfn.org/attribution/">attributions page</a> for
+        attributions of other work on the site.
+      </p>
+    </div>
+  </div>
+</footer>
 <?php wp_footer(); ?>
 </body>
 </html>
