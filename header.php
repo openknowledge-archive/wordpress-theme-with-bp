@@ -17,23 +17,26 @@
     <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
-    <?php do_action('okf_panel'); ?>
+    <div id="ok-panel" class="closed"><div class="container"><iframe src="//a.okfn.org/html/oki/panel/panel.html" scrolling="no"></iframe></div></div>
     <header class="header">
       <div class="container">
-        <div id="header-brand">
-          <a href="/">
-            <h1><?php echo bloginfo('name'); ?></h1>
-          </a>
-        </div>
-        <nav id="header-nav" role="navigation" class="hidden-xs">
-          <div id="nav-social" class="social-links">
-            <a class="facebook" href="https://www.facebook.com/<?php echo get_option('theme_options_option_name', 'OKFNetwork')['okfnwp_fb_id']; ?>"><i class="fa fa-facebook fa-lg"></i></a>
-            <a class="twitter" href="https://twitter.com/<?php echo get_option('theme_options_option_name', 'okfn')['okfnwp_twitter_id']; ?>"><i class="fa fa-twitter fa-lg"></i></a>
+        <div class="col-sm-7 col-md-8">
+          <div id="header-brand">
+            <a href="/">
+              <h1><?php echo bloginfo('name'); ?></h1>
+            </a>
           </div>
-        </nav>
-        <div class="okfn-wp-ribbon">
-          <a href="#" data-toggle="collapse" data-target="#okf-panel" title="Part of the Open Knowledge Foundation Network">An Open Knowledge Foundation Site</a>
         </div>
+        <div class="col-sm-5 col-md-4">
+          <nav id="header-nav" role="navigation" class="hidden-xs">
+            <div id="nav-social" class="social-links">
+              <a class="facebook" href="https://www.facebook.com/<?php echo get_option('theme_options_option_name', 'OKFNetwork')['okfnwp_fb_id']; ?>"><i class="fa fa-facebook fa-lg"></i></a>
+              <a class="twitter" href="https://twitter.com/<?php echo get_option('theme_options_option_name', 'okfn')['okfnwp_twitter_id']; ?>"><i class="fa fa-twitter fa-lg"></i></a>
+            </div>
+          </nav>
+        </div>
+        <?php do_action('okf_panel'); ?>
+        <div class="hidden-xs" id="ok-panel-wrapper"><a class="ok-ribbon" href="//okfn.org/"><img src="//a.okfn.org/html/oki/panel/assets/images/oki-ribbon.png" alt="Open Knowledge"></a></div>
       </div>
     </header>
     <nav id="navbar-main" class="navbar navbar-default" role="navigation">
