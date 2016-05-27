@@ -1,4 +1,10 @@
 <?php
+
+// Set a fixed, maximum allowed width for any content in the theme
+if ( ! isset( $content_width ) ) {
+	$content_width = 600;
+}
+
 /**
  * Add theme Options page
  */
