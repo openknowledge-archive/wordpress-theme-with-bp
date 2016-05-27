@@ -10,7 +10,6 @@
 
 </div><!-- / .row -->
 </div></main>
-<?php get_template_part('inc/mailing-bar'); ?>
 <footer class="footer">
   <div class="container">
     <div class="row footer-primary">
