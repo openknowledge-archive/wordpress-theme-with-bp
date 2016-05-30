@@ -1,8 +1,12 @@
 <?php
-
+/**
+ * OKFNWP functions and definitions
+ *
+ * @package OKFNWP
+ */
 // Set a fixed, maximum allowed width for any content in the theme
-if ( ! isset( $content_width ) ) {
-	$content_width = 600;
+if (!isset($content_width)) {
+    $content_width = 600;
 }
 
 /**
@@ -16,17 +20,16 @@ require_once ('inc/theme-options.php');
 
 function okfn_theme_setup() {
 
-    /**
-     * OKFNWP functions and definitions
-     *
-     * @package OKFNWP
-     */
+    // Load translated strings for the theme, placed in /languages in
+    // https://codex.wordpress.org/I18n_for_WordPress_Developers
+    load_theme_textdomain('okfnwp', get_template_directory() . '/languages');
+
     /**
      * Add theme support for features
      */
     add_theme_support('html5');
     add_theme_support('menus');
-    add_theme_support('custom-logo', ['height' => 50, 'flex-width'  => true, 'header-text' => array( 'site-title', 'site-description' )]);
+    add_theme_support('custom-logo', ['height' => 50, 'flex-width' => true, 'header-text' => array('site-title', 'site-description')]);
     add_theme_support('post-thumbnails');
 
     /**
@@ -44,15 +47,21 @@ function okfn_theme_setup() {
     add_theme_support('title-tag');
 
     /**
-     * Custom header image
+     * Backwards compatible Custom Header images
      */
-    add_theme_support('custom-header', array(
-        'flex-width' => true,
-        'width' => 1200,
-        'flex-height' => true,
-        'height' => 300,
-        'header-text' => false
-    ));
+    global $wp_version;
+
+    if (version_compare($wp_version, '3.4', '>=')) :
+        add_theme_support('custom-header', array(
+            'width' => 1200,
+            'height' => 300,
+            'flex-height' => true,
+            'flex-width' => true,
+            'header-text' => false
+        ));
+    else :
+        add_custom_image_header($wp_head_callback, $admin_head_callback);
+    endif;
 
     /**
      * Register menus
@@ -93,18 +102,6 @@ if (!function_exists('_wp_render_title_tag')) :
 
     add_action('wp_head', 'theme_slug_render_title');
 endif;
-
-/**
- * Remove height and width attributes from images
- */
-function remove_width_attribute($html) {
-    $html = preg_replace('/(width|height)="\d*"\s/', "", $html);
-    return $html;
-}
-
-add_filter('post_thumbnail_html', 'remove_width_attribute', 10);
-add_filter('image_send_to_editor', 'remove_width_attribute', 10);
-
 
 /**
  * Shortcodes
@@ -151,7 +148,7 @@ function enqueue_scripts() {
         'okfn-wp', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true
     );
     wp_enqueue_script('okfn-wp');
-    
+
     wp_enqueue_script('ok-ribbon', '//a.okfn.org/html/oki/panel/assets/js/frontend.js', [], [], true);
 }
 
