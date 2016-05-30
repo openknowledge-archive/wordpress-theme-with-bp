@@ -332,17 +332,25 @@ dd {
  */
 
 .author-info {
+  font-size: @font-size-small;
   background: @okf-lightgrey;
-  padding: 15px;
-  margin: 40px 0;
-
-  h4 {
-    line-height: 1;
+  padding: @jumbotron-padding/2;
+  margin-top: @jumbotron-padding;
+  margin-bottom: @jumbotron-padding;
+  
+  h4{
+    margin-top: auto;
   }
 
   .thumbnail {
-    float: left;
-    margin-right: 25px;
+    float: right;
+    overflow: hidden;
+    border-radius: 100%;
+    border: none;
+    margin-left: @jumbotron-padding/2;
+    margin-top: @jumbotron-padding/6;
+    margin-bottom: 0;
+    padding: 0;
   }
 }
 
@@ -405,6 +413,7 @@ dd {
   .avatar {
     float: left;
     margin: 0 10px 10px 0;
+    border-radius: 100%;
   }
   .comment-meta {
     font-size: 14px;
@@ -494,7 +503,7 @@ dd {
   .rss-widget-icon{
     float: right;
   }
-  
+
   li{
     padding-top: @padding-small-vertical;
     padding-bottom: @padding-small-vertical;
@@ -527,5 +536,19 @@ the .form-control class assigned */
   select{
     margin-top: @padding-large-vertical;
     &:extend(.form-control);
+  }
+}
+
+.carousel{
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-height: @jumbotron-padding * 10;
+  overflow: hidden;
+  
+  img{
+    min-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
   }
 }
