@@ -252,25 +252,24 @@ function okfn_front_page_editor_notice() {
 /* Define some useful global variables */
 
 function okfn_global_vars() {
-
-    global $featured_cats;
-
     global $rendered_posts_ids;
     $rendered_posts_ids = [];
 }
 
-add_action('after_setup_theme', 'okfn_global_vars');
+add_action('wp_head', 'okfn_global_vars');
 
+// Get the post categories which will be featured on the Home page from the
+// most recently updated 20 posts. Once the categories are extracted 
 function okfn_get_featured_cats() {
-    global $featured_cats;
+    global $frontpage_categories;
 
-    if (!isset($featured_cats)):
-        $featured_cats = [];
+    if (!isset($frontpage_categories)):
+        $frontpage_categories = [];
     endif;
 
     $okfn_recent_posts = get_posts(['posts_per_page' => 20, 'post_type' => 'post', 'post_status' => 'publish', 'fields' => 'ids', 'orderby' => 'date_modified']);
     foreach ($okfn_recent_posts as $value):
-        $featured_cats = array_unique(array_merge($featured_cats, wp_get_post_terms($value, 'category', ['orderby' => 'count', 'fields' => 'ids'])));
+        $frontpage_categories = array_unique(array_merge($frontpage_categories, wp_get_post_terms($value, 'category', ['orderby' => 'count', 'fields' => 'ids'])));
     endforeach;
 }
 

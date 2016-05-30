@@ -4,7 +4,7 @@
  * 
  * @package OKFNWP
  */
-global $featured_cats;
+global $frontpage_categories;
 global $rendered_posts_ids;
 
 get_header();
@@ -39,7 +39,7 @@ get_header();
 
   // Get the most recent post for each of the featured categories defined in
   // functions.php via okfn_global_vars().
-  foreach ($featured_cats as $value):
+  foreach ($frontpage_categories as $value):
       $args = [
           'cat' => $value,
           'orderby' => 'date',
