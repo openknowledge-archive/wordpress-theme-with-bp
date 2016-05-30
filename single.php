@@ -15,9 +15,6 @@ get_header();
       // Include the page content template.
       get_template_part('content', 'single');
 
-      // Output the author bio box
-      get_template_part('author-info');
-
       // If comments are open or we have at least one comment, load up the comment template.
       if (comments_open() || get_comments_number()) {
           comments_template();
