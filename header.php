@@ -64,23 +64,21 @@
       </div>
     </nav>
 
-    <?php if (get_header_image() && is_front_page()) : ?>
-
-        <section class="carousel" style="background-image:url(<?php header_image(); ?>)">
-          <img src="<?php header_image(); ?>" alt="">
-        </section>
-
-    <?php elseif (is_front_page()) : ?>
-
+    <?php
+    // If a Custom Header image is selected, show it just on the front page
+    if (get_header_image() && is_front_page()) :
+        ?>
+        <div class="carousel"><img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" /></div>
+        <?php
+    elseif (is_front_page()) :
+        // Skip the page set as Front while rendering the Custom Header
+        ?>
     <?php else : ?>
-
         <div id="page-banner">
           <div class="container">
             <h1>
               <?php
               $blog_title = __('Blog', 'okfnwp');
-              $error_404_title = __('Page Not Found', 'okfnwp');
-              $search_title = sprintf(__('Search Results for: %1$s', 'okfnwp'), get_search_query());
 
               if (is_single() || is_page()) :
                   the_title();
@@ -97,8 +95,10 @@
                       echo $blog_title;
                   endif;
               elseif (is_404()) :
+                  $error_404_title = __('Page Not Found', 'okfnwp');
                   echo $error_404_title;
               elseif (is_search()) :
+                  $search_title = sprintf(__('Search Results for: %1$s', 'okfnwp'), get_search_query());
                   echo $search_title;
               endif;
               ?>
