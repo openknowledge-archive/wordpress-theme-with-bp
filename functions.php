@@ -94,13 +94,13 @@ add_action('widgets_init', 'okfn_widgets_init');
 // Backwards compatibility function for Title Tag theme support
 if (!function_exists('_wp_render_title_tag')) :
 
-    function theme_slug_render_title() {
+    function okfn_render_title() {
         ?>
         <title><?php wp_title('|', true, 'right'); ?></title>
         <?php
     }
 
-    add_action('wp_head', 'theme_slug_render_title');
+    add_action('wp_head', 'okfn_render_title');
 endif;
 
 /**
@@ -188,7 +188,8 @@ function okfnwp_customizer($wp_customize) {
             'theme-default' => 'Default (Green)',
             'theme-red' => 'Red',
             'theme-white' => 'White',
-            'theme-blue' => 'Blue'
+            'theme-blue' => 'Blue',
+            'theme-black' => 'Black'            
         )
         )
     );
@@ -249,14 +250,14 @@ function okfn_front_page_editor_notice() {
     }
 }
 
-/* Define some useful global variables */
+/* Define some global variables */
 
 function okfn_global_vars() {
     global $rendered_posts_ids;
     $rendered_posts_ids = [];
 }
 
-add_action('wp_head', 'okfn_global_vars');
+add_action('wp', 'okfn_global_vars');
 
 // Get the post categories which will be featured on the Home page from the
 // most recently updated 20 posts. Once the categories are extracted 
@@ -295,3 +296,11 @@ function okfn_is_post_rendered($post) {
         return false;
     endif;
 }
+
+//add_action('pre_get_posts', 'okfn_frontpage_posts_per_page');
+//
+//function okfn_frontpage_posts_per_page($query) {
+//    if ($query->is_home() && $query->is_main_query()) {
+//        $query->set('posts_per_page', '20');
+//    }
+//}

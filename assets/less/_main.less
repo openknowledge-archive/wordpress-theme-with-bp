@@ -75,15 +75,15 @@
 // v27, and possibly others) which causes buttons to render with slightly
 // incorrect heights in certain circumstances. Setting an explicit height sorts
 // this out.
-/*.btn {
-  height: @input-height-base;
+.btn {
+  max-height: @input-height-base;
 }
 .btn-lg {
-  height: @input-height-large;
+  max-height: @input-height-large;
 }
 .btn-sm {
-  height: @input-height-small;
-}*/
+  max-height: @input-height-small;
+}
 
 .col-md-2-4 {
   .make-md-column(2.4);
@@ -108,7 +108,7 @@
 
   h1 {
     margin: 0;
-    padding: @header-padding 0 @header-padding @jumbotron-padding*2;
+    padding: @header-padding 0;
     font-size: @header-font-size;
     font-weight: 700;
     line-height: 1em;
@@ -119,7 +119,8 @@
 }
 
 .custom-logo-link{
-  &:extend(.pull-left);
+  float: left;
+  margin-right: @jumbotron-padding/2;
 }
 
 .custom-logo{
@@ -152,12 +153,23 @@
   margin-bottom: 0;
 
   .navbar-form{
+    border: none;
     &:extend(.navbar-right);
 
-    border: none;
+    @media (max-width: @screen-sm-max){
+      margin-right: -15px;    
+    }
+    @media (min-width: @screen-md-min){
+      margin-right: -20px;    
+    }
 
     .input-group-search {
-      width: 300px;
+      @media (min-width: @screen-md-min){
+        width: 300px;        
+      }
+      @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max){
+        width: 220px;        
+      }
       .input-group-btn .btn {
         color: @okf-darkgrey;
         background: transparent;
@@ -165,7 +177,7 @@
         border-left-color: transparent;
         // Fixes a bug in Firefox (v. 27 and posibly others) which cause buttons
         // to render at a slightly incorrect/larger height.
-        height: @input-height-base;
+        max-height: @input-height-base;
       }
     }
 
@@ -190,15 +202,16 @@
     }
   }
 }
+
 // Align the last nav item with the grid.
-#navbar-main-collapse > :last-child {
+/*#navbar-main-collapse > :last-child {
   @media (min-width: @grid-float-breakpoint) {
     .navbar > .container &,
     .navbar > .container-fluid & {
       margin-right: -(5 + (2 * @navbar-padding-horizontal));
     }
   }
-}
+}*/
 
 // FIXME: make nav default to open without javascript on small devices
 
@@ -421,6 +434,10 @@ html.wf-lato-n7-active {
 }
 
 .navbar-form {
+  @media (min-width: @screen-sm-min){
+    padding-left: 0;
+    padding-right: 0;
+  }
   /*  border: none;
   
     .input-group-search {
@@ -545,14 +562,6 @@ ul.icon-list {
     height: @feature-block-xs-img-height;
     margin-bottom: 0;
   }
-}
-
-.feature-scoda {
-  background-image: url(assets/img/photography/scoda.jpg)
-}
-
-.feature-okcon {
-  background-image: url(assets/img/photography/okcon-2011-group.jpg)
 }
 
 .feature-block-primary {
