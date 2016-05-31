@@ -29,8 +29,13 @@
         <div class="col-sm-5 col-md-4">
           <nav id="header-nav" role="navigation" class="hidden-xs">
             <div id="nav-social" class="social-links">
-              <a class="facebook" href="https://www.facebook.com/<?php echo get_option('theme_options_option_name', 'OKFNetwork')['okfnwp_fb_id']; ?>"><i class="fa fa-facebook fa-lg"></i></a>
-              <a class="twitter" href="https://twitter.com/<?php echo get_option('theme_options_option_name', 'okfn')['okfnwp_twitter_id']; ?>"><i class="fa fa-twitter fa-lg"></i></a>
+              <?php
+              // TO DO: Implement this in a better way
+              $fb_id = get_option('theme_options_option_name', 'OKFNetwork')['okfnwp_fb_id'];
+              $twt_id = get_option('theme_options_option_name', 'okfn')['okfnwp_twitter_id'];
+              ?>
+              <a class="facebook" href="https://www.facebook.com/<?php echo isset($fb_id) ? $fb_id : ''; ?>"><i class="fa fa-facebook fa-lg"></i></a>
+              <a class="twitter" href="https://twitter.com/<?php echo isset($twt_id) ? $twt_id : ''; ?>"><i class="fa fa-twitter fa-lg"></i></a>
             </div>
           </nav>
         </div>
