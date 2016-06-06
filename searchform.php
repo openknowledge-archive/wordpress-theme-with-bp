@@ -8,7 +8,7 @@
     <span class="input-group-btn">
       <button type="submit" class="btn btn-default">
         <span class="fa fa-lg fa-search"></span>
-        <span class="sr-only">Submit</span>
+        <span class="sr-only"><?php _e('Submit', 'okfnwp'); ?></span>
       </button>
     </span>
   </div>

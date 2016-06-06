@@ -47,12 +47,12 @@
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main-collapse">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"><?php _e('Toggle navigation', 'okfnwp'); ?></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand visible-xs" href="#">Menu</a>
+          <a class="navbar-brand visible-xs" href="#"><?php _e('Menu', 'okfnwp'); ?></a>
         </div>
         <div id="navbar-main-collapse" class="collapse navbar-collapse">
 		  <?php

@@ -14,6 +14,17 @@ if (!isset($content_width)) {
  */
 require_once ('inc/theme-options.php');
 
+/**
+ * Shortcodes
+ */
+require_once ('inc/latest-posts.php');
+
+
+/**
+ * Template tags
+ */
+require_once ('inc/template-tags.php');
+
 /*
  * Initialize the OKFN WordPress theme and set up several required options
  */
@@ -68,7 +79,7 @@ function okfn_theme_setup() {
    */
   register_nav_menus(array(
 	'primary' => 'Primary',
-	'footer-menu-1' => 'Footer Menu 1',
+	'footer-menu-1' => __('Footer Menu 1', 'okfnwp'),
 //        'footer-menu-2' => 'Footer Menu 2'
   ));
 }
@@ -80,7 +91,7 @@ function okfn_widgets_init() {
    * Register sidebars
    */
   register_sidebar(array(
-	'name' => 'Sidebar',
+	'name' => __('Sidebar', 'okfnwp'),
 	'id' => 'sidebar',
 	'before_widget' => '<li id="%1$s" class="widget %2$s">',
 	'after_widget' => '</li>',
@@ -102,17 +113,6 @@ if (!function_exists('_wp_render_title_tag')) :
 
   add_action('wp_head', 'okfn_render_title');
 endif;
-
-/**
- * Shortcodes
- */
-require_once ('inc/latest-posts.php');
-
-
-/**
- * Template tags
- */
-require_once ('inc/template-tags.php');
 
 /**
  * Enqueue stylesheets
@@ -185,11 +185,11 @@ function okfnwp_customizer($wp_customize) {
 	'section' => 'colors',
 	'type' => 'select',
 	'choices' => array(
-	  'theme-default' => 'Default (Green)',
-	  'theme-red' => 'Red',
-	  'theme-white' => 'White',
-	  'theme-blue' => 'Blue',
-	  'theme-black' => 'Black'
+	  'theme-default' => __('Default (Green)', 'okfnwp'),
+	  'theme-red' => __('Red', 'okfnwp'),
+	  'theme-white' => __('White', 'okfnwp'),
+	  'theme-blue' => __('Blue', 'okfnwp'),
+	  'theme-black' => __('Black', 'okfnwp')
 	)
 	  )
   );
@@ -223,7 +223,7 @@ function wp_title_for_home($title, $sep) {
   }
 
   if (( $paged >= 2 || $page >= 2 ) && !is_404()) {
-	$title = "$title $sep " . sprintf(__('Page %s', 'twentythirteen'), max($paged, $page));
+	$title = "$title $sep " . sprintf(__('Page %s', 'okfnwp'), max($paged, $page));
   }
 
   return $title;
