@@ -57,26 +57,32 @@ get_header();
     <div class="row">
 	  <?php
 	  foreach ($featured_posts as $key => $fp):
+
 		if ($fp->have_posts()):
+
 		  while ($fp->have_posts()):
+
 			$fp->the_post();
 
 			// Before rendering the post check if its the last one and if its index
 			// is not an even number, don't show it
-			if (($key == sizeof($featured_posts)) && ($key % 2 != 0)):
-			  break;
-			else:
-			  if (!okfn_is_post_rendered($post)):
-				get_template_part('content', 'front');
-			  else:
-				unset($featured_posts[$key]);
-			  endif;
+			if ($key == (count($featured_posts) - 1) && ($key % 2 == 0)):
+			  break 1;
 			endif;
+
+			// Check if the current post has already been rendered on the page
+			if (!okfn_is_post_rendered($post)):
+			  get_template_part('content', 'front');
+			endif;
+
 		  endwhile;
+
 		  wp_reset_postdata();
+
 		else:
 		  get_template_part('content', 'none');
 		endif;
+
 	  endforeach;
 	  ?>
     </div>
