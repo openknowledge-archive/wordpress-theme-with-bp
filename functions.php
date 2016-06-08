@@ -1,4 +1,5 @@
 <?php
+
 /**
  * OKFNWP functions and definitions
  *
@@ -63,25 +64,26 @@ function okfn_theme_setup() {
   global $wp_version;
 
   if (version_compare($wp_version, '3.4', '>=')) :
-	add_theme_support('custom-header', array(
-	  'width' => 1200,
-	  'height' => 300,
-	  'flex-height' => true,
-	  'flex-width' => true,
-	  'header-text' => false
-	));
+    add_theme_support('custom-header', array(
+      'width' => 1200,
+      'height' => 300,
+      'flex-height' => true,
+      'flex-width' => true,
+      'header-text' => false
+    ));
   else :
-	add_custom_image_header($wp_head_callback, $admin_head_callback);
+    add_custom_image_header($wp_head_callback, $admin_head_callback);
   endif;
 
   /**
    * Register menus
    */
   register_nav_menus(array(
-	'primary' => 'Primary',
-	'footer-menu-1' => __('Footer Menu 1', 'okfnwp'),
+    'primary' => 'Primary',
+    'footer-menu-1' => __('Footer Menu 1', 'okfnwp'),
 //        'footer-menu-2' => 'Footer Menu 2'
   ));
+
 }
 
 add_action('after_setup_theme', 'okfn_theme_setup');
@@ -91,13 +93,14 @@ function okfn_widgets_init() {
    * Register sidebars
    */
   register_sidebar(array(
-	'name' => __('Sidebar', 'okfnwp'),
-	'id' => 'sidebar',
-	'before_widget' => '<li id="%1$s" class="widget %2$s">',
-	'after_widget' => '</li>',
-	'before_title' => '<h3 class="widgettitle">',
-	'after_title' => '</h3>'
+    'name' => __('Sidebar', 'okfnwp'),
+    'id' => 'sidebar',
+    'before_widget' => '<li id="%1$s" class="widget %2$s">',
+    'after_widget' => '</li>',
+    'before_title' => '<h3 class="widgettitle">',
+    'after_title' => '</h3>'
   ));
+
 }
 
 add_action('widgets_init', 'okfn_widgets_init');
@@ -106,9 +109,11 @@ add_action('widgets_init', 'okfn_widgets_init');
 if (!function_exists('_wp_render_title_tag')) :
 
   function okfn_render_title() {
-	?>
-	<title><?php wp_title('|', true, 'right'); ?></title>
-	<?php
+
+    ?>
+    <title><?php wp_title('|', true, 'right'); ?></title>
+    <?php
+
   }
 
   add_action('wp_head', 'okfn_render_title');
@@ -119,10 +124,11 @@ endif;
  */
 function enqueue_stylesheets() {
   wp_enqueue_style(
-	  'lato-font', '//fonts.googleapis.com/css?family=Lato:400,700,900'
+      'lato-font', '//fonts.googleapis.com/css?family=Lato:400,700,900'
   );
 
   wp_enqueue_style('stylesheet', get_stylesheet_uri());
+
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_stylesheets');
@@ -132,24 +138,25 @@ add_action('wp_enqueue_scripts', 'enqueue_stylesheets');
  */
 function enqueue_scripts() {
   if (!is_admin()) {
-	wp_deregister_script('jquery');
-	wp_register_script(
-		'jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', false, '1.11', false
-	);
-	wp_enqueue_script('jquery');
+    wp_deregister_script('jquery');
+    wp_register_script(
+        'jquery', get_template_directory_uri() . '/assets/js/jquery.min.js', false, '1.11', false
+    );
+    wp_enqueue_script('jquery');
   }
 
   wp_register_script(
-	  'bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), false, false
+      'bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), false, false
   );
   wp_enqueue_script('bootstrap');
 
   wp_register_script(
-	  'okfn-wp', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true
+      'okfn-wp', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), '1.0.0', true
   );
   wp_enqueue_script('okfn-wp');
 
   wp_enqueue_script('ok-ribbon', '//a.okfn.org/html/oki/panel/assets/js/frontend.js', [], [], true);
+
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
@@ -161,12 +168,13 @@ function get_menu_by_location($location) {
   $menus = get_nav_menu_locations();
 
   if (!isset($menus[$location])) {
-	return false;
+    return false;
   }
 
   $menu = get_term($menus[$location], 'nav_menu');
 
   return $menu;
+
 }
 
 /**
@@ -175,24 +183,25 @@ function get_menu_by_location($location) {
 function okfnwp_customizer($wp_customize) {
   // Add option to Customizer
   $wp_customize->add_setting(
-	  'color_scheme', array(
-	'default' => 'theme-default'
-	  )
+      'color_scheme', array(
+    'default' => 'theme-default'
+      )
   );
   $wp_customize->add_control(
-	  'color_scheme', array(
-	'label' => __('Select theme color', 'okfnwp'),
-	'section' => 'colors',
-	'type' => 'select',
-	'choices' => array(
-	  'theme-default' => __('Default (Green)', 'okfnwp'),
-	  'theme-red' => __('Red', 'okfnwp'),
-	  'theme-white' => __('White', 'okfnwp'),
-	  'theme-blue' => __('Blue', 'okfnwp'),
-	  'theme-black' => __('Black', 'okfnwp')
-	)
-	  )
+      'color_scheme', array(
+    'label' => __('Select theme color', 'okfnwp'),
+    'section' => 'colors',
+    'type' => 'select',
+    'choices' => array(
+      'theme-default' => __('Default (Green)', 'okfnwp'),
+      'theme-red' => __('Red', 'okfnwp'),
+      'theme-white' => __('White', 'okfnwp'),
+      'theme-blue' => __('Blue', 'okfnwp'),
+      'theme-black' => __('Black', 'okfnwp')
+    )
+      )
   );
+
 }
 
 add_action('customize_register', 'okfnwp_customizer');
@@ -201,6 +210,7 @@ add_action('customize_register', 'okfnwp_customizer');
 function theme_color($classes) {
   $classes[] = get_theme_mod('color_scheme', '');
   return $classes;
+
 }
 
 add_filter('body_class', 'theme_color');
@@ -212,21 +222,22 @@ function wp_title_for_home($title, $sep) {
   global $paged, $page;
 
   if (is_feed()) {
-	return $title;
+    return $title;
   }
 
   $title .= get_bloginfo('name', 'display');
 
   $site_description = get_bloginfo('description', 'display');
   if ($site_description && ( is_home() || is_front_page() )) {
-	$title = "$title $sep $site_description";
+    $title = "$title $sep $site_description";
   }
 
   if (( $paged >= 2 || $page >= 2 ) && !is_404()) {
-	$title = "$title $sep " . sprintf(__('Page %s', 'okfnwp'), max($paged, $page));
+    $title = "$title $sep " . sprintf(__('Page %s', 'okfnwp'), max($paged, $page));
   }
 
   return $title;
+
 }
 
 /*
@@ -241,13 +252,16 @@ function okfn_front_page_editor_notice() {
   global $post;
 
   if (isset($page_on_front) && $page_on_front === $post->ID) {
-	remove_post_type_support('page', 'editor');
-	?>
-	<div class="notice notice-warning inline">
-	  <p><?php _e('You are currently editing the page that shows your front page content.', 'okfnwp'); ?></p>
-	</div>
-	<?php
+    remove_post_type_support('page', 'editor');
+
+    ?>
+    <div class="notice notice-warning inline">
+      <p><?php _e('You are currently editing the page that shows your front page content.', 'okfnwp'); ?></p>
+    </div>
+    <?php
+
   }
+
 }
 
 /* Define some global variables */
@@ -255,6 +269,7 @@ function okfn_front_page_editor_notice() {
 function okfn_global_vars() {
   global $rendered_posts_ids;
   $rendered_posts_ids = [];
+
 }
 
 add_action('wp', 'okfn_global_vars');
@@ -265,19 +280,20 @@ function okfn_get_featured_cats() {
   global $frontpage_categories;
 
   if (!isset($frontpage_categories)):
-	$frontpage_categories = [];
+    $frontpage_categories = [];
   endif;
 
-  // Get 20 latest posts ordered by date of modification
-  $okfn_recent_posts = get_posts(['posts_per_page' => 20, 'post_type' => 'post', 'post_status' => 'publish', 'fields' => 'ids', 'orderby' => 'date_modified']);
+  // Get 10 latest posts ordered by date of modification
+  $okfn_recent_posts = get_posts(['posts_per_page' => 20, 'fields' => 'ids', 'date_query' => [['column' => 'post_published_gmt', 'after' => '2 months ago']]]);
 
   // Extract the IDs of the largest unique categories assigned
-  // to the 20 latest posts
+  // to the 10 latest posts
   foreach ($okfn_recent_posts as $value):
-	// Must use wp_get_post_terms() here as we need the categories ordered by the
-	// total number of posts they contain
-	$frontpage_categories = array_unique(array_merge($frontpage_categories, wp_get_post_terms($value, 'category', ['orderby' => 'count', 'fields' => 'ids'])));
+    // Must use wp_get_post_terms() here as we need the categories ordered by the
+    // total number of posts they contain
+    $frontpage_categories = array_unique(array_merge($frontpage_categories, wp_get_post_terms($value, 'category', ['fields' => 'ids'])));
   endforeach;
+
 }
 
 add_action('wp', 'okfn_get_featured_cats');
@@ -288,8 +304,9 @@ function okfn_save_rendered_post_id($post) {
   global $rendered_posts_ids;
 
   if (isset($post) && !in_array($post->ID, $rendered_posts_ids)):
-	array_push($rendered_posts_ids, $post->ID);
+    array_push($rendered_posts_ids, $post->ID);
   endif;
+
 }
 
 // Check if a post has not already been rendered in the loop
@@ -298,8 +315,9 @@ function okfn_is_post_rendered($post) {
   global $post; //Required!
 
   if (isset($post) && in_array($post->ID, $rendered_posts_ids)):
-	return true;
+    return true;
   else:
-	return false;
+    return false;
   endif;
+
 }

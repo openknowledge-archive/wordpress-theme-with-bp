@@ -1,95 +1,99 @@
 <?php
+
 /**
  * The template for displaying the front page of the site.
  * 
  * @package OKFNWP
  */
-global $frontpage_categories;
-global $rendered_posts_ids;
-
 get_header();
+
 ?>
 <div class="main col-md-8">
   <?php
-  // TO DO: Think of a way for setting this value fixed from the Theme Options
-  // in the WordPress admin.
+
+  // This is currently the most flexible approach for the Featured post category.
+  // Get the category object by its path/slug.
+
   if (!isset($featured_cat)) {
-	$featured_cat = 'Featured';
+    $featured_cat = get_category_by_path('featured');
   }
 
-  // Check if the Home page is paginated and skip the featured post rendering if it is
-  if (isset($paged) && $paged < 2):
-	$featured = new WP_Query([
-	  'category_name' => $featured_cat,
-	  'posts_per_page' => 1
-	]);
+  // Check if the Home page is paginated and skip the featured post rendering if
+  // any page after the first one is loaded
 
-	if ($featured->have_posts()):
-	  while ($featured->have_posts()) : $featured->the_post();
-		get_template_part('content', 'featured');
-	  endwhile;
-	  wp_reset_postdata();
-	else:
-	  ?>
-	  <div class="alert alert-warning"><p>
-		  <?php _e("Please select a Featured posts category in the Theme Options, to see the category's most recent post here.", 'okfnwp'); ?>
-		</p></div>
-	<?php
-	endif;
+  if (isset($paged, $featured_cat) && $paged < 2):
+
+    $featured = new WP_Query([
+      'cat' => $featured_cat->term_id,
+      'posts_per_page' => 1
+    ]);
+
+    if ($featured->have_posts()):
+
+      while ($featured->have_posts()) : $featured->the_post();
+
+        get_template_part('content', 'featured');
+
+      endwhile;
+
+      wp_reset_postdata();
+
+    endif;
+
+  else:
+
+    ?>
+    <div class="alert alert-warning"><p>
+        <?php _e("Sorry, the Featured post category is not available and this content can not be rendered.", 'okfnwp'); ?>
+      </p></div>
+  <?php
+
   endif;
 
   // Get the most recent post for each of the featured categories defined in
   // functions.php via okfn_global_vars().
-  foreach ($frontpage_categories as $value):
-	$args = [
-	  'cat' => $value,
-	  'orderby' => 'date',
-	  'posts_per_page' => 1,
-	  'post__not_in' => $rendered_posts_ids
-	];
-	$featured_posts[] = new WP_Query($args);
-  endforeach;
 
-  // Render the most recent post for each of the featured categories,
-  // while checking and remembering already rendered posts.
-  if ($featured_posts):
-	?>
+  global $frontpage_categories;
+  global $rendered_posts_ids;
+
+  if ($frontpage_categories):
+
+    ?>
     <div class="row">
-	  <?php
-	  foreach ($featured_posts as $key => $fp):
+      <?php
 
-		if ($fp->have_posts()):
+      $args = [
+        'category__in' => $frontpage_categories,
+        'posts_per_page' => 10,
+        'post__not_in' => $rendered_posts_ids
+      ];
 
-		  while ($fp->have_posts()):
+      // Query the most recent post from each of the featured categories,
+      // while checking and remembering already rendered posts.
+      $featured_post = new WP_Query($args);
 
-			$fp->the_post();
+      if ($featured_post->have_posts()):
 
-			// Before rendering the post check if its the last one and if its index
-			// is not an even number, don't show it
-			if ($key == (count($featured_posts) - 1) && ($key % 2 == 0)):
-			  break 1;
-			endif;
+        while ($featured_post->have_posts()):
 
-			// Check if the current post has already been rendered on the page
-			if (!okfn_is_post_rendered($post)):
-			  get_template_part('content', 'front');
-			endif;
+          $featured_post->the_post();
 
-		  endwhile;
+          // Check if the current post has already been rendered on the page
+          if (!okfn_is_post_rendered($post)):
+            get_template_part('content', 'front');
+          endif;
 
-		  wp_reset_postdata();
+        endwhile;
 
-		else:
-		  get_template_part('content', 'none');
-		endif;
+        wp_reset_postdata();
 
-	  endforeach;
-	  ?>
+      endif;
+
+      ?>
     </div>
-	<?php
-  endif;
-  ?>
+<?php endif; ?>
 </div>
 <?php
+
 get_sidebar();
 get_footer();
