@@ -283,11 +283,11 @@ function okfn_get_featured_cats() {
     $frontpage_categories = [];
   endif;
 
-  // Get 10 latest posts ordered by date of modification
-  $okfn_recent_posts = get_posts(['posts_per_page' => 20, 'fields' => 'ids', 'date_query' => [['column' => 'post_published_gmt', 'after' => '2 months ago']]]);
+  // Get 20 latest posts ordered by date of modification
+  $okfn_recent_posts = get_posts(['posts_per_page' => 20, 'fields' => 'ids']);
 
   // Extract the IDs of the largest unique categories assigned
-  // to the 10 latest posts
+  // to the 20 latest posts
   foreach ($okfn_recent_posts as $value):
     // Must use wp_get_post_terms() here as we need the categories ordered by the
     // total number of posts they contain

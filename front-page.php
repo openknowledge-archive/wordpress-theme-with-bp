@@ -57,7 +57,7 @@ get_header();
   global $rendered_posts_ids;
 
   if ($frontpage_categories):
-
+    
     ?>
     <div class="row">
       <?php
@@ -65,6 +65,7 @@ get_header();
       $args = [
         'category__in' => $frontpage_categories,
         'posts_per_page' => 10,
+        'date_query' => [['column' => 'post_published_gmt', 'after' => '6 months ago']],
         'post__not_in' => $rendered_posts_ids
       ];
 
@@ -91,7 +92,7 @@ get_header();
 
       ?>
     </div>
-<?php endif; ?>
+  <?php endif; ?>
 </div>
 <?php
 
