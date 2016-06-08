@@ -65,7 +65,6 @@ get_header();
       $args = [
         'category__in' => $frontpage_categories,
         'posts_per_page' => 10,
-        'date_query' => [['column' => 'post_published_gmt', 'after' => '6 months ago']],
         'post__not_in' => $rendered_posts_ids
       ];
 
