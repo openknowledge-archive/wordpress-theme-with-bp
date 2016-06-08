@@ -44,7 +44,7 @@ get_header();
 
     ?>
     <div class="alert alert-warning"><p>
-        <?php _e("Sorry, the Featured post category is not available and this content can not be rendered.", 'okfnwp'); ?>
+        <?php _e("Sorry, the Featured post category is not available and this content cannot be rendered.", 'okfnwp'); ?>
       </p></div>
   <?php
 
