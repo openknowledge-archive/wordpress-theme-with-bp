@@ -40,7 +40,7 @@ get_header();
 
     endif;
 
-  else:
+  /*else:
 
     ?>
     <div class="alert alert-warning"><p>
@@ -48,7 +48,7 @@ get_header();
       </p></div>
   <?php
 
-  endif;
+  */endif;
 
   // Get the most recent post for each of the featured categories defined in
   // functions.php via okfn_global_vars().

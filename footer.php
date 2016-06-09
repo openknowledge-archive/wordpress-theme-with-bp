@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying the footer.
  *
@@ -6,6 +7,7 @@
  *
  * @package OKFNWP
  */
+
 ?>
 
 </div><!-- / .row -->
@@ -19,17 +21,31 @@
         </a>
       </div>
       <div class="col-sm-9 col-md-10">
-		<?php
-		$menu = get_menu_by_location('footer-menu-1');
-		if (!is_wp_error($menu)) {
-		  wp_nav_menu(array(
-			'theme_location' => 'footer-menu-1',
-			'container' => 'nav',
-			'container_class' => 'footer-menu',
-			'items_wrap' => '<ul class="list-inline">%3$s</ul>'
-		  ));
-		}
-		?>
+        <?php
+
+        // Check if the required menu location exists and show any menu if it doesn't.
+        if (has_nav_menu('footer-menu-1')) :
+
+          wp_nav_menu(array(
+            'theme_location' => 'footer-menu-1',
+            'container' => 'nav',
+            'container_class' => 'footer-menu',
+            'items_wrap' => '<ul class="list-inline">%3$s</ul>',
+            'fallback_cb' => false
+          ));
+
+        else:
+
+          wp_nav_menu(array(
+            'container' => 'nav',
+            'container_class' => 'footer-menu',
+            'items_wrap' => '<ul class="list-inline">%3$s</ul>',
+            'fallback_cb' => false
+          ));
+
+        endif;
+
+        ?>
       </div>
     </div>
     <div class="footer-secondary">
@@ -39,22 +55,22 @@
       </p>
       <p>
         <a class="license" rel="license" href="https://creativecommons.org/licenses/by/4.0/">
-		  <?php echo file_get_contents(get_stylesheet_directory() . "/assets/img/cc.svg", FILE_USE_INCLUDE_PATH); ?>
-		  <?php echo file_get_contents(get_stylesheet_directory() . "/assets/img/by.svg", FILE_USE_INCLUDE_PATH); ?>
+          <?php echo file_get_contents(get_stylesheet_directory() . "/assets/img/cc.svg", FILE_USE_INCLUDE_PATH); ?>
+          <?php echo file_get_contents(get_stylesheet_directory() . "/assets/img/by.svg", FILE_USE_INCLUDE_PATH); ?>
         </a>
-		<?php _e('Content on this site, made by', 'okfnwp'); ?>
+        <?php _e('Content on this site, made by', 'okfnwp'); ?>
         <a xmlns:cc="http://creativecommons.org/ns#"
            href="https://okfn.org/"
            property="cc:attributionName"
            rel="cc:attributionURL"><?php _e('Open Knowledge International', 'okfnwp'); ?></a>, <?php _e('is licensed under a', 'okfnwp'); ?>
         <a rel="license"
            href="https://creativecommons.org/licenses/by/4.0/">
-			 <?php _e('Creative Commons Attribution 4.0 International License', 'okfnwp'); ?>
-		</a>.
+             <?php _e('Creative Commons Attribution 4.0 International License', 'okfnwp'); ?>
+        </a>.
       </p>
       <p>
-		<?php _e('Refer to our', 'okfnwp'); ?> <a href="https://okfn.org/attribution/">
-		  <?php _e('attributions page', 'okfnwp'); ?></a> <?php _e('for attributions of other work on the site', 'okfnwp'); ?>.
+        <?php _e('Refer to our', 'okfnwp'); ?> <a href="https://okfn.org/attribution/">
+          <?php _e('attributions page', 'okfnwp'); ?></a> <?php _e('for attributions of other work on the site', 'okfnwp'); ?>.
       </p>
     </div>
   </div>
