@@ -65,6 +65,7 @@ get_header();
       $args = [
         'category__in' => $frontpage_categories,
         'posts_per_page' => 10,
+        'post_status' => 'publish', // Required! so that no Private posts are listed for logged in users
         'post__not_in' => $rendered_posts_ids
       ];
 
