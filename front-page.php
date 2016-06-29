@@ -27,7 +27,8 @@ get_header();
 
     // Get Sticky posts
     $sticky = new WP_Query([
-      'post__in' => get_option('sticky_posts')
+      'post__in' => get_option('sticky_posts'),
+      'post__not_in' => $rendered_posts_ids
     ]);
 
     if ($sticky->have_posts()):
@@ -46,7 +47,8 @@ get_header();
     // -------------------------------------------------------------------------
     $featured = new WP_Query([
       'cat' => $featured_cat->term_id,
-      'posts_per_page' => 1
+      'posts_per_page' => 1,
+      'post__not_in' => $rendered_posts_ids
     ]);
 
     if ($featured->have_posts()):
