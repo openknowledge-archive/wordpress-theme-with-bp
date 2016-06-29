@@ -242,7 +242,7 @@ function wp_title_for_home($title, $sep) {
 
 /*
  * Remove the content editor for the page which is set as a Front page to make it
- * obvious that the page content shouldn't be editted. 
+ * obvious that the page content shouldn't be editted.
  */
 
 add_action('edit_form_after_title', 'okfn_front_page_editor_notice');
@@ -275,7 +275,7 @@ function okfn_global_vars() {
 add_action('wp', 'okfn_global_vars');
 
 // Get the post categories which will be featured on the Home page from the
-// most recently updated 20 posts. Once the categories are extracted 
+// most recently updated 20 posts. Once the categories are extracted
 function okfn_get_featured_cats() {
   global $frontpage_categories;
 
@@ -319,5 +319,39 @@ function okfn_is_post_rendered($post) {
   else:
     return false;
   endif;
+
+}
+
+function okfn_get_first_image_url_from_post_content() {
+  global $post, $posts;
+
+  $first_img_url = '';
+  $is_image_file = false;
+
+  // Match <img> tags within post content
+  $image_urls = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
+
+  if ($image_urls):
+
+    $first_img_url = $matches[1][0];
+
+  endif;
+
+  // Check if the image URL points to an actual image file
+  // ---------------------------------------------------------------------------
+  if (function_exists('getimagesize')):
+
+    $is_image_file = getimagesize($first_img_url);
+
+  endif;
+
+  if (empty($first_img_url) || !$is_image_file) :
+
+    // Load default image if none is available
+    $first_img_url = get_template_directory_uri() . "/assets/img/pre-header-logo.png";
+
+  endif;
+
+  return $first_img_url;
 
 }
