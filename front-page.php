@@ -2,7 +2,7 @@
 
 /**
  * The template for displaying the front page of the site.
- * 
+ *
  * @package OKFNWP
  */
 get_header();
@@ -13,16 +13,37 @@ get_header();
 
   // This is currently the most flexible approach for the Featured post category.
   // Get the category object by its path/slug.
+  // ---------------------------------------------------------------------------
 
   if (!isset($featured_cat)) {
     $featured_cat = get_category_by_path('featured');
   }
 
-  // Check if the Home page is paginated and skip the featured post rendering if
-  // any page after the first one is loaded
+  // Check if the Home page is paginated and skip the featured posts rendering
+  // on any page after the first one
+  // ---------------------------------------------------------------------------
 
   if (isset($paged, $featured_cat) && $paged < 2):
 
+    // Get Sticky posts
+    $sticky = new WP_Query([
+      'post__in' => get_option('sticky_posts')
+    ]);
+
+    if ($sticky->have_posts()):
+
+      while ($sticky->have_posts()) : $sticky->the_post();
+
+        get_template_part('content', 'featured');
+
+      endwhile;
+
+      wp_reset_postdata();
+
+    endif;
+
+    // Get Featured posts
+    // -------------------------------------------------------------------------
     $featured = new WP_Query([
       'cat' => $featured_cat->term_id,
       'posts_per_page' => 1
@@ -40,15 +61,15 @@ get_header();
 
     endif;
 
-  /*else:
+  /* else:
 
     ?>
     <div class="alert alert-warning"><p>
-        <?php _e("Sorry, the Featured post category is not available and this content cannot be rendered.", 'okfnwp'); ?>
-      </p></div>
-  <?php
+    <?php _e("Sorry, the Featured post category is not available and this content cannot be rendered.", 'okfnwp'); ?>
+    </p></div>
+    <?php
 
-  */endif;
+   */endif;
 
   // Get the most recent post for each of the featured categories defined in
   // functions.php via okfn_global_vars().
@@ -57,7 +78,7 @@ get_header();
   global $rendered_posts_ids;
 
   if ($frontpage_categories):
-    
+
     ?>
     <div class="row">
       <?php
