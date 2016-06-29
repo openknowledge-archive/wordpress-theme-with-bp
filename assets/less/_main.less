@@ -157,18 +157,18 @@
     &:extend(.navbar-right);
 
     @media (max-width: @screen-sm-max){
-      margin-right: -15px;    
+      margin-right: -15px;
     }
     @media (min-width: @screen-md-min){
-      margin-right: -20px;    
+      margin-right: -20px;
     }
 
     .input-group-search {
       @media (min-width: @screen-md-min){
-        width: 300px;        
+        width: 300px;
       }
       @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max){
-        width: 220px;        
+        width: 220px;
       }
       .input-group-btn .btn {
         color: @okf-darkgrey;
@@ -415,7 +415,8 @@ html.wf-lato-n7-active {
 
   ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 0;
 
     & > li:not(:last-child) {
       border-bottom: @okf-post-border;
@@ -439,7 +440,7 @@ html.wf-lato-n7-active {
     padding-right: 0;
   }
   /*  border: none;
-  
+
     .input-group-search {
       width: 300px;
       .input-group-btn .btn {
@@ -449,7 +450,7 @@ html.wf-lato-n7-active {
         border-left-color: transparent;
       }
     }
-  
+
     .form-control {
       border-color: @okf-midgrey;
       border-right-color:@navbar-default-bg;
