@@ -25,22 +25,27 @@ get_header();
 
   if (isset($paged, $featured_cat) && $paged < 2):
 
-    // Get Sticky posts
-    $sticky_post = new WP_Query([
-      'post__in' => get_option('sticky_posts'),
-      'post__not_in' => $rendered_posts_ids,
-      'ignore_sticky_posts' => 0
-    ]);
+    $all_sticky_posts = get_option('sticky_posts');
 
-    if ($sticky_post->have_posts()):
+    // Show Sticky Posts only when at least one Sticky Post exists
+    if (!empty($all_sticky_posts)):
 
-      while ($sticky_post->have_posts()) : $sticky_post->the_post();
+      $sticky_post = new WP_Query([
+        'post__in' => $all_sticky_posts,
+        'post__not_in' => $rendered_posts_ids
+      ]);
 
-        get_template_part('content', 'featured');
+      if ($sticky_post->have_posts()):
 
-      endwhile;
+        while ($sticky_post->have_posts()) : $sticky_post->the_post();
 
-      wp_reset_postdata();
+          get_template_part('content', 'featured');
+
+        endwhile;
+
+        wp_reset_postdata();
+
+      endif;
 
     endif;
 
@@ -49,8 +54,7 @@ get_header();
     $featured = new WP_Query([
       'cat' => $featured_cat->term_id,
       'posts_per_page' => 1,
-      'post__not_in' => $rendered_posts_ids,
-      'ignore_sticky_posts' => 1
+      'post__not_in' => $rendered_posts_ids
     ]);
 
     if ($featured->have_posts()):
