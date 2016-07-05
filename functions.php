@@ -94,7 +94,7 @@ function okfn_widgets_init() {
    */
   register_sidebar(array(
     'name' => __('Sidebar', 'okfnwp'),
-    'id' => 'sidebar',
+    'id' => 'sidebar-1',
     'before_widget' => '<li id="%1$s" class="widget %2$s">',
     'after_widget' => '</li>',
     'before_title' => '<h3 class="widgettitle">',
