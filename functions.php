@@ -341,7 +341,9 @@ function okfn_get_first_image_url_from_post_content() {
   // ---------------------------------------------------------------------------
   if (function_exists('getimagesize')):
 
-    $is_image_file = getimagesize($first_img_url);
+    if (!empty($first_img_url)):
+      $is_image_file = getimagesize($first_img_url);
+    endif;
 
   endif;
 
