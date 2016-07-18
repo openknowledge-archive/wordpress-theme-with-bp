@@ -24,7 +24,7 @@
       <div class="container">
         <div class="col-sm-7 col-md-8">
           <div id="header-brand">
-            <?php okfn_theme_logo(); ?>            
+            <?php okfn_theme_logo(); ?>
             <h1><a rel="home" href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
           </div>
         </div>
@@ -36,8 +36,8 @@
               $theme_options = get_option('theme_options_option_name');
 
               ?>
-              <a class="facebook" href="https://www.facebook.com/<?php echo isset($theme_options['okfnwp_fb_id']) ? $theme_options['okfnwp_fb_id'] : ''; ?>"><i class="fa fa-facebook fa-lg"></i></a>
-              <a class="twitter" href="https://twitter.com/<?php echo isset($theme_options['okfnwp_twitter_id']) ? $theme_options['okfnwp_twitter_id'] : ''; ?>"><i class="fa fa-twitter fa-lg"></i></a>
+              <a class="facebook" href="https://www.facebook.com/<?php echo isset($theme_options['okfnwp_fb_id']) ? $theme_options['okfnwp_fb_id'] : 'okfn'; ?>"><i class="fa fa-facebook fa-lg"></i></a>
+              <a class="twitter" href="https://twitter.com/<?php echo isset($theme_options['okfnwp_twitter_id']) ? $theme_options['okfnwp_twitter_id'] : 'OKFNetwork'; ?>"><i class="fa fa-twitter fa-lg"></i></a>
             </div>
           </nav>
         </div>
@@ -61,22 +61,22 @@
 
           // Check if the required menu location exists and show any menu if it doesn't.
           if (has_nav_menu('primary')):
-            
+
             wp_nav_menu(array(
               'theme_location' => 'primary',
               'menu_class' => 'nav navbar-nav',
               'container' => '',
               'fallback_cb' => false
             ));
-          
+
           else:
-            
+
             wp_nav_menu(array(
               'menu_class' => 'nav navbar-nav',
               'container' => '',
               'fallback_cb' => false
             ));
-          
+
           endif;
 
           get_search_form();
