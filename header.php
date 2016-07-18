@@ -36,8 +36,8 @@
               $theme_options = get_option('theme_options_option_name');
 
               ?>
-              <a class="facebook" href="https://www.facebook.com/<?php echo isset($theme_options['okfnwp_fb_id']) ? $theme_options['okfnwp_fb_id'] : 'okfn'; ?>"><i class="fa fa-facebook fa-lg"></i></a>
-              <a class="twitter" href="https://twitter.com/<?php echo isset($theme_options['okfnwp_twitter_id']) ? $theme_options['okfnwp_twitter_id'] : 'OKFNetwork'; ?>"><i class="fa fa-twitter fa-lg"></i></a>
+              <a class="facebook" href="https://www.facebook.com/<?php echo isset($theme_options['okfnwp_fb_id']) ? $theme_options['okfnwp_fb_id'] : 'OKFNetwork'; ?>"><i class="fa fa-facebook fa-lg"></i></a>
+              <a class="twitter" href="https://twitter.com/<?php echo isset($theme_options['okfnwp_twitter_id']) ? $theme_options['okfnwp_twitter_id'] : 'okfn'; ?>"><i class="fa fa-twitter fa-lg"></i></a>
             </div>
           </nav>
         </div>
