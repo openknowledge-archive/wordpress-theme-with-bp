@@ -47,8 +47,8 @@ function okfn_theme_setup() {
   /**
    * Post thumbnails
    */
-  set_post_thumbnail_size(570, 180, true);
-  add_image_size('small', 370, 180, true);
+  set_post_thumbnail_size(570, 180, ['center', 'center']);
+  add_image_size('small', 370, 180, ['center', 'center']);
 
   /*
    * Let WordPress manage the document title.
@@ -252,7 +252,7 @@ function okfn_front_page_editor_notice() {
   global $post;
 
   if (isset($page_on_front) && $page_on_front === $post->ID) {
-    remove_post_type_support('page', 'editor');
+    // remove_post_type_support('page', 'editor');
 
     ?>
     <div class="notice notice-warning inline">
