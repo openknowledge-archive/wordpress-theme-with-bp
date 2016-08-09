@@ -165,9 +165,12 @@
  * Postbit
  */
 .post {
+
+  &:not(&.page){
   border-bottom: @okf-post-border;
   margin-bottom: 30px;
   padding-bottom: 20px;
+  }
 
   & + .blog-pagination {
     border-top: 0;

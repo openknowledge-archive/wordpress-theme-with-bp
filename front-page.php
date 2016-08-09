@@ -16,7 +16,7 @@ if (is_page()):
 
       ?>
       <div class="main col-md-12">
-      <?php get_template_part('content', 'page'); ?>
+        <?php get_template_part('content', 'page'); ?>
       </div>
 
       <?php
@@ -142,7 +142,7 @@ else:
 
         ?>
       </div>
-  <?php endif; ?>
+    <?php endif; ?>
   </div>
   <?php
 

@@ -17,6 +17,7 @@ require_once ('inc/theme-options.php');
 
 /**
  * Add theme Shortcodes from the old OKI WordPress theme
+ * https://github.com/oki-archive/wordpress-theme-okfn
  */
 require_once ('inc/shortcodes.php');
 
