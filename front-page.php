@@ -11,12 +11,18 @@ if (is_page()):
 
   // Show static page content
 
-  ?>
-  <div class="main col-md-12">
-    <?php get_template_part('content', 'page'); ?>
-  </div>
+  if (have_posts()):
+    while (have_posts()) : the_post();
 
-  <?php
+      ?>
+      <div class="main col-md-12">
+      <?php get_template_part('content', 'page'); ?>
+      </div>
+
+      <?php
+
+    endwhile;
+  endif;
 
 else:
 
@@ -136,7 +142,7 @@ else:
 
         ?>
       </div>
-    <?php endif; ?>
+  <?php endif; ?>
   </div>
   <?php
 

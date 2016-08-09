@@ -16,6 +16,11 @@ if (!isset($content_width)) {
 require_once ('inc/theme-options.php');
 
 /**
+ * Add theme Shortcodes from the old OKI WordPress theme
+ */
+require_once ('inc/shortcodes.php');
+
+/**
  * Shortcodes
  */
 require_once ('inc/latest-posts.php');
