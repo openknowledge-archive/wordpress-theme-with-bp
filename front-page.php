@@ -7,7 +7,9 @@
  */
 get_header();
 
-if (is_page()):
+global $post;
+
+if (is_singular() && !empty($post->post_content)):
 
   // Show static page content
 
