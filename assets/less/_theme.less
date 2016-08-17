@@ -167,9 +167,9 @@
 .post {
 
   &:not(&.page){
-  border-bottom: @okf-post-border;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
+    border-bottom: @okf-post-border;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
   }
 
   & + .blog-pagination {
@@ -184,8 +184,16 @@
 }
 .post--featured{
   .post__thumb{
+    min-height: 0;
     max-height: 350px;
     overflow: hidden;
+  }
+  .post__thumb-link{
+    min-width: 100%;
+  }
+
+  img{
+    min-width: 100%;
   }
 }
 .post--excerpt {
@@ -206,23 +214,27 @@
   }
 }
 .post__thumb {
+  .post-thumb-flex;
   background-color: @okf-lightgrey;
   position: relative;
   overflow: hidden;
-  min-height: 180px;
-  max-height: 180px;
-  display: flex;
-
-  a{
-    margin: auto; // Enables vertical centering with Flexbox
-  }
+  min-height: @post-thumb-height;
+  max-height: @post-thumb-height;
 
   img {
-    display: block;
-    height: auto;
-    padding: @padding-small-horizontal;
-    width: 100vw;
+    min-height: @post-thumb-height;
+    max-width: inherit;
   }
+}
+.post__thumb-default{
+
+  .wp-post-image{
+    min-height: 0;
+  }
+
+}
+.post__thumb-link{
+  .post-thumb-flex;
 }
 .post__category {
   background: @okf-primary;
