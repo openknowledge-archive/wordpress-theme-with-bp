@@ -220,8 +220,10 @@
   max-height: @post-thumb-height;
 
   img {
-    min-height: @post-thumb-height;
+    /*min-height: @post-thumb-height;*/
     max-width: inherit;
+    height: auto;
+    margin: auto; // Needed for vertical centering with Flexbox
   }
 }
 .post__thumb-default{
