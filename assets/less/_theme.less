@@ -184,14 +184,16 @@
 }
 .post--featured{
   .post__thumb{
-    min-height: 350px;
+    min-height: @post-thumb-featured-height;
+
+    img{
+      min-height: @post-thumb-featured-height;
+      width: auto;
+    }
   }
   .post__thumb-link{
-    min-width: inherit;
-  }
-
-  img{
-    min-width: 100%;
+    min-height: @post-thumb-featured-height;
+    width: auto;
   }
 }
 .post--excerpt {
@@ -220,9 +222,8 @@
   max-height: @post-thumb-height;
 
   img {
-    /*min-height: @post-thumb-height;*/
+    min-height: 100%;
     max-width: inherit;
-    height: auto;
     margin: auto; // Needed for vertical centering with Flexbox
   }
 }
