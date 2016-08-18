@@ -7,11 +7,13 @@ $categories = get_the_category();
 
 if (has_post_thumbnail()) :
   $thumb = get_the_post_thumbnail($post, 'small');
-else:
+elseif (okfn_get_first_image_url_from_post_content()):
   $thumb = sprintf('<img class="attachment-small size-small wp-post-image" src="%s" alt="">', okfn_get_first_image_url_from_post_content());
+else:
+  $thumb = NULL;
 endif;
 
-if (!empty($thumb)) :
+if ($thumb) :
 
   ?>
   <div class="post__thumb">
@@ -27,6 +29,8 @@ if (!empty($thumb)) :
   </div>
 <?php else: ?>
   <div class="post__thumb post__thumb-default">
-    <a class="post__thumb-link" href="<?php the_permalink(); ?>"></a>
+    <a class="post__thumb-link" href="<?php the_permalink(); ?>">
+      <img class="attachment-small size-small wp-post-image" src="<?php echo get_template_directory_uri() . "/assets/img/pre-header-logo.png"; ?>" alt="">
+    </a>
   </div>
 <?php endif;
