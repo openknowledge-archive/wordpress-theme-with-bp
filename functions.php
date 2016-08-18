@@ -353,6 +353,13 @@ function okfn_get_first_image_url_from_post_content() {
 
   endif;
 
+  if (empty($first_img_url) || !$is_image_file) :
+
+    // Reset value if no image is available
+    $first_img_url = false;
+
+  endif;
+
   return $first_img_url;
 
 }
