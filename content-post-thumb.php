@@ -5,6 +5,10 @@
  */
 $categories = get_the_category();
 
+if (!has_post_thumbnail()):
+  $first_post_image = okfn_get_first_image_url_from_post_content();
+endif;
+
 if (has_post_thumbnail()) :
 
   ?>
@@ -19,10 +23,15 @@ if (has_post_thumbnail()) :
 
     ?>
   </div>
+<?php elseif (!empty($first_post_image)): ?>
+  <div class="post__thumb">
+    <a class="post__thumb-link" href="<?php the_permalink(); ?>">
+      <img class="attachment-small size-small wp-post-image" src="<?php echo $first_post_image; ?>" alt="">
+    </a>
+  </div>
 <?php else: ?>
   <div class="post__thumb post__thumb-default">
     <a class="post__thumb-link" href="<?php the_permalink(); ?>">
-      <img class="attachment-small size-small wp-post-image" src="<?php echo okfn_get_first_image_url_from_post_content(); ?>" alt="">
     </a>
   </div>
 <?php endif;
