@@ -11,7 +11,7 @@ else:
   $thumb = sprintf('<img class="attachment-small size-small wp-post-image" src="%s" alt="">', okfn_get_first_image_url_from_post_content());
 endif;
 
-if ($thumb) :
+if (!empty($thumb)) :
 
   ?>
   <div class="post__thumb">
