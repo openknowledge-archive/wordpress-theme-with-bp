@@ -10,3 +10,4 @@ bower_components/
 
 # NetBeans project files
 nbproject/
+.netbeans.xml
