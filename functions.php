@@ -158,11 +158,52 @@ function enqueue_scripts() {
   wp_enqueue_script('ok-ribbon', '//a.okfn.org/html/oki/panel/assets/js/frontend.js', [], [], true);
 
   if (is_single() && comments_open()) {
-    wp_enqueue_script('google-recaptcha', '//www.google.com/recaptcha/api.js', [], [], true);
+    wp_enqueue_script('recaptcha', '//www.google.com/recaptcha/api.js', [], [], true);
   }
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
+add_action('wp_footer', 'okfn_recaptcha_validator');
+
+function okfn_recaptcha_validator() {
+  /* Make sure this script is loaded _after_ reCAPTCHA's API script!
+   * 
+   * The following script is embedded because we need to get the URL of the
+   * current theme directory.
+   */
+  ?>
+  <script>
+    jQuery("#submit").click(function (e) {
+      var data_2;
+      jQuery.ajax({
+        type: "POST",
+        url: "<?php echo get_template_directory_uri(); ?>/inc/recaptcha.php",
+        data: jQuery('#commentform').serialize(),
+        async: false,
+        success: function (data) {
+          if (data.nocaptcha === "true") {
+            data_2 = 1;
+          } else if (data.spam === "true") {
+            data_2 = 1;
+          } else {
+            data_2 = 0;
+          }
+        }
+      });
+      if (data_2 != 0) {
+        e.preventDefault();
+        if (data_2 == 1) {
+          alert("Sorry for the inconvenience, but please confirm that you're not a robot. Thank you.");
+        } else {
+          alert("Seems like you'd like to spam. Sorry, that's not allowed.");
+        }
+      } else {
+        jQuery("#commentform").submit;
+      }
+    });
+  </script>
+  <?php
+}
 
 /**
  * Fetch Menu object to output name
@@ -354,12 +395,16 @@ function okfn_get_first_image_url_from_post_content() {
 add_filter('comment_form_submit_button', 'okfn_google_captcha');
 
 function okfn_google_captcha($submit_button) {
+  return '<div class="g-recaptcha" data-sitekey= "' . okfn_get_recaptcha_public_key() . '"></div>' . $submit_button;
+}
+
+function okfn_get_recaptcha_public_key() {
 
   if (defined('RECAPTCHA_PUBLIC_KEY')):
-    $recaptcha_key = RECAPTCHA_PUBLIC_KEY;
+    $recaptcha_public_key = RECAPTCHA_PUBLIC_KEY;
   else:
-    $recaptcha_key = '6Lf7NCITAAAAALKEyDJtNygRuXv9NsiINqYWF5Y3';    
+    $recaptcha_public_key = '6Lf7NCITAAAAALKEyDJtNygRuXv9NsiINqYWF5Y3';
   endif;
-  
-    return '<div class="g-recaptcha" data-sitekey= "' . $recaptcha_key . '"></div>' . $submit_button;
+
+  return $recaptcha_public_key;
 }
