@@ -341,8 +341,8 @@ function okfn_get_first_image_url_from_post_content() {
 
   if (empty($first_img_url) || !$is_image_file) :
 
-    // Load default image if none is available
-    $first_img_url = get_template_directory_uri() . "/assets/img/pre-header-logo.png";
+    // Reset value if no image is available
+    $first_img_url = false;
 
   endif;
 

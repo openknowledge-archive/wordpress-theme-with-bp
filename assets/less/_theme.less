@@ -167,9 +167,9 @@
 .post {
 
   &:not(&.page){
-  border-bottom: @okf-post-border;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
+    border-bottom: @okf-post-border;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
   }
 
   & + .blog-pagination {
@@ -184,8 +184,7 @@
 }
 .post--featured{
   .post__thumb{
-    max-height: 350px;
-    overflow: hidden;
+    max-height: @post-thumb-featured-height;
   }
 }
 .post--excerpt {
@@ -206,23 +205,30 @@
   }
 }
 .post__thumb {
+  .post-thumb-flex;
   background-color: @okf-lightgrey;
   position: relative;
   overflow: hidden;
-  min-height: 180px;
-  max-height: 180px;
-  display: flex;
-
-  a{
-    margin: auto; // Enables vertical centering with Flexbox
-  }
+  max-height: @post-thumb-height;
 
   img {
-    display: block;
-    height: auto;
-    padding: @padding-small-horizontal;
-    width: 100vw;
+    min-width: 100%;
+    max-width: inherit;
+    height: 100%;
+    margin: auto; // Needed for vertical centering with Flexbox
   }
+}
+.post__thumb-default{
+  max-height: inherit;
+  padding: 20px;
+
+  img{
+    height: auto;
+  }
+}
+.post__thumb-link{
+  .post-thumb-flex;
+  min-width: 100%;
 }
 .post__category {
   background: @okf-primary;
