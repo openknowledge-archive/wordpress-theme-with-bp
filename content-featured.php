@@ -8,7 +8,7 @@
 
 <div class="post--blog post--featured post--excerpt">
 
-  <?php get_template_part('content-post-thumb'); ?>
+  <?php get_template_part('content-post-thumb-featured'); ?>
 
   <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
   <p class="post__meta"><i class="fa fa-calendar"></i> <?php echo sprintf(__('Posted %1$s', 'okfnwp'), get_the_date()); ?></p>
