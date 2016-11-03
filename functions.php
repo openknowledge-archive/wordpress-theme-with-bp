@@ -159,12 +159,13 @@ function enqueue_scripts() {
 
   if (is_single() && comments_open()) {
     wp_enqueue_script('recaptcha', '//www.google.com/recaptcha/api.js', [], [], true);
+    okfn_recaptcha_validator();
   }
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
-add_action('wp_footer', 'okfn_recaptcha_validator');
 
+/* Validate user comments with Google reCAPTCHA */
 function okfn_recaptcha_validator() {
   /* Make sure this script is loaded _after_ reCAPTCHA's API script!
    * 
