@@ -423,3 +423,6 @@ function okfn_custom_meta_tags() {
   endif;
   
 }
+
+// Remove WordPress generator meta tag to hide current WP version
+add_filter('the_generator', '__return_false');
