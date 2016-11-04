@@ -166,6 +166,7 @@ function enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'enqueue_scripts');
 
 /* Validate user comments with Google reCAPTCHA */
+
 function okfn_recaptcha_validator() {
   /* Make sure this script is loaded _after_ reCAPTCHA's API script!
    * 
@@ -408,4 +409,17 @@ function okfn_get_recaptcha_public_key() {
   endif;
 
   return $recaptcha_public_key;
+}
+
+// Include custom meta tags set in Theme Options to <head>
+add_filter('wp_head', 'okfn_custom_meta_tags');
+
+function okfn_custom_meta_tags() {
+
+  $theme_options = get_option('theme_options_option_name');
+
+  if (!empty($theme_options['okfnwp_meta'])):
+    echo wp_specialchars_decode($theme_options['okfnwp_meta'], ENT_COMPAT);
+  endif;
+  
 }
