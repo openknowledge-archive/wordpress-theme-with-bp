@@ -128,15 +128,16 @@ function enqueue_stylesheets() {
           'lato-font', '//fonts.googleapis.com/css?family=Lato:400,700,900'
   );
 
-  wp_enqueue_style('stylesheet', get_stylesheet_uri());
+  wp_enqueue_style('stylesheet', get_template_directory_uri() . '/style.css', NULL, filemtime(get_stylesheet_directory() . '/style.css'));
 }
 
-add_action('wp_enqueue_scripts', 'enqueue_stylesheets');
+add_action('wp_print_styles', 'enqueue_stylesheets');
 
 /**
  * Enqueue scripts
  */
 function enqueue_scripts() {
+  
   if (!is_admin()) {
     wp_deregister_script('jquery');
     wp_register_script(
