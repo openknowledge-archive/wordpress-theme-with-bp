@@ -49,3 +49,5 @@ If this is the first time you activate Polylang on your site, you will be asked 
 Once the conversion is complete, you should set **URL modifications** and **Synchronization** in Settings > Languages > Settings. These settings may vary and depend on your prefference.
 
 In case you're synchronizing you categories, tags or any other meta content types, you should translate all of those so that the correct meta is matched when creating content in different languages.
+
+If you're already using WPML, you can easily migrate to Polylang with the [WPML to Polylang](https://wordpress.org/plugins/wpml-to-polylang/) plugin.
