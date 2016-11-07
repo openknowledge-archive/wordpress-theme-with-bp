@@ -87,7 +87,7 @@ add_shortcode( 'zcarousel', 'zcarousel_shortcode' );
 
 function zcarousel_slide_shortcode( $atts, $content = null ) {
 	extract( shortcode_atts( array(
-			'img' => 'http://farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png',
+			'img' => '//farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png',
 		), $atts ) );
   return 'data.push({"url":"' .$img. '","caption":"' .$content. '"});';
 }
@@ -107,7 +107,7 @@ add_shortcode( 'banner', 'banner_shortcode' );
 
 function banner_shortcode( $atts, $content = null ) {
 	extract( shortcode_atts( array(
-			'bg' => 'http://assets.okfn.org/web/images/banner.png',
+			'bg' => '//assets.okfn.org/web/images/banner.png',
 			'height' => '320',
 			'bgcolour' => 'd4d4d4',
 			'class' => ''
@@ -450,7 +450,7 @@ function latest_posts_shortcode( $atts ){
 			// Extract the first img src from the post body
 			$regex = '/magazine.image\s*=\s*"?([^"\s]*)/';
 			preg_match($regex, get_the_content(), $matches);
-			$post_img = 'http://assets.okfn.org/web/images/blog-placeholder.png';
+			$post_img = '//assets.okfn.org/web/images/blog-placeholder.png';
 			if (count($matches)) $post_img = $matches[1];
 
 			$list .= '<li><a href="' . get_permalink() . '" class="box"><span class="image" style="background-image:url('.$post_img.');"></span><div class="text"><h4 class="title">' . get_the_title() . '</h4><p class="date">' . get_the_date() . '</p>' . '<span>' . get_the_excerpt() . '</span></div></a></li>';
@@ -487,7 +487,7 @@ function fbanner_shortcode( $atts, $content = null ) {
 		), $atts ) );
 
 		if ($link == y ) {
-			$open = '<a href="http://www.flickr.com/photos/'.$id.'/sets/'.$set.'/show/" class="flickr banner"><span class="inner">';
+			$open = '<a href="//www.flickr.com/photos/'.$id.'/sets/'.$set.'/show/" class="flickr banner"><span class="inner">';
 		}
 		else {
 			$open = '<div class="flickr banner"><div class="inner">';
