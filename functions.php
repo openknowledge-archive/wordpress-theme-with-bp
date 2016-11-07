@@ -427,3 +427,7 @@ function okfn_custom_meta_tags() {
 
 // Remove WordPress generator meta tag to hide current WP version
 add_filter('the_generator', '__return_false');
+
+
+// Fix inconsistencies in the src and srcset content for images
+add_filter( 'wp_calculate_image_srcset_meta', '__return_null' );
