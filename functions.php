@@ -137,7 +137,7 @@ add_action('wp_print_styles', 'enqueue_stylesheets');
  * Enqueue scripts
  */
 function enqueue_scripts() {
-  
+
   if (!is_admin()) {
     wp_deregister_script('jquery');
     wp_register_script(
@@ -422,12 +422,34 @@ function okfn_custom_meta_tags() {
   if (!empty($theme_options['okfnwp_meta'])):
     echo wp_specialchars_decode($theme_options['okfnwp_meta'], ENT_COMPAT);
   endif;
-  
 }
 
 // Remove WordPress generator meta tag to hide current WP version
 add_filter('the_generator', '__return_false');
 
-
 // Fix inconsistencies in the src and srcset content for images
-add_filter( 'wp_calculate_image_srcset_meta', '__return_null' );
+add_filter('wp_calculate_image_srcset_meta', '__return_null');
+
+// Add custom RSS feed
+add_feed('enclosure', 'oki_custom_rss2_feed');
+
+function oki_custom_rss2_feed() {
+  load_template(TEMPLATEPATH . '/oki-feed-rss2.php');
+}
+
+// Generate a permalink to an author image on Gravatar, with specific size
+function okfn_get_avatar_img_url($image_size) {
+  $user_email = get_the_author_meta('id');
+  return get_avatar_url($user_email, ['size' => $image_size]);
+}
+
+function okfn_get_url_filesize($url) {
+
+//  $headers = get_headers($url, 1);
+//
+//  if (!empty($headers)):
+//    return $headers["Content-Length"];
+//  endif;
+  
+  return 'N/A';
+}
