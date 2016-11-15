@@ -87,10 +87,15 @@ do_action('rss_tag_pre', 'rss2');
         <?php endif; ?>
         <pubDate><?php echo mysql2date('D, d M Y H:i:s +0000', get_post_time('Y-m-d H:i:s', true), false); ?></pubDate>
         <dc:creator><![CDATA[<?php the_author() ?>]]></dc:creator>
-        <?php $gravatar_img = okfn_get_avatar_img_url(264); ?>
-        <enclosure url="<?php echo $gravatar_img; ?>" length="<?php echo okfn_get_url_filesize($gravatar_img); ?>" type="image/jpeg" />
-        <?php the_category_rss('rss2') ?>
-
+        <?php
+        $gravatar_img = okfn_get_avatar_img_url(264);
+        if (!empty($gravatar_img)):
+          ?>
+          <enclosure url="<?php echo $gravatar_img; ?>" length="N/A" type="image/jpeg" />
+          <?php
+        endif;
+        the_category_rss('rss2')
+        ?>
         <guid isPermaLink="false"><?php the_guid(); ?></guid>
         <?php if (get_option('rss_use_excerpt')) : ?>
           <description><![CDATA[<?php the_excerpt_rss(); ?>]]></description>
