@@ -442,7 +442,7 @@ function okfn_get_avatar_img_url($image_size) {
   $user_id = get_the_author_meta('id');
 
   if (validate_gravatar($user_id)):
-    return esc_url(remove_query_arg(['d', 'r'], get_avatar_url($user_id, ['size' => $image_size])));
+    return str_replace('http:', 'https:', esc_url(remove_query_arg(['d', 'r'], get_avatar_url($user_id, ['size' => $image_size]))));
   endif;
 }
 
@@ -479,7 +479,7 @@ function validate_gravatar($id_or_email) {
   }
 
   $hashkey = md5(strtolower(trim($email)));
-  $uri = 'http://www.gravatar.com/avatar/' . $hashkey . '?d=404';
+  $uri = 'https://www.gravatar.com/avatar/' . $hashkey . '?d=404';
 
   $data = wp_cache_get($hashkey);
   if (false === $data) {
