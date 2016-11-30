@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The header for our theme.
  *
@@ -7,7 +6,6 @@
  *
  * @package OKFNWP
  */
-
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
   <head>
@@ -32,10 +30,9 @@
           <nav id="header-nav" role="navigation" class="hidden-xs">
             <div id="nav-social" class="social-links">
               <?php
-
               $theme_options = get_option('theme_options_option_name');
-
               ?>
+              <a class="discuss" href="https://discuss.okfn.org/<?php echo isset($theme_options['okfnwp_discuss_id']) ? $theme_options['okfnwp_discuss_id'] : ''; ?>"><i class="fa fa-comment-o fa-lg"></i></a> 
               <a class="facebook" href="https://www.facebook.com/<?php echo isset($theme_options['okfnwp_fb_id']) ? $theme_options['okfnwp_fb_id'] : 'OKFNetwork'; ?>"><i class="fa fa-facebook fa-lg"></i></a>
               <a class="twitter" href="https://twitter.com/<?php echo isset($theme_options['okfnwp_twitter_id']) ? $theme_options['okfnwp_twitter_id'] : 'okfn'; ?>"><i class="fa fa-twitter fa-lg"></i></a>
             </div>
@@ -58,52 +55,45 @@
         </div>
         <div id="navbar-main-collapse" class="collapse navbar-collapse">
           <?php
-
-          // Check if the required menu location exists and show any menu if it doesn't.
+// Check if the required menu location exists and show any menu if it doesn't.
           if (has_nav_menu('primary')):
 
             wp_nav_menu(array(
-              'theme_location' => 'primary',
-              'menu_class' => 'nav navbar-nav',
-              'container' => '',
-              'fallback_cb' => false
+                'theme_location' => 'primary',
+                'menu_class' => 'nav navbar-nav',
+                'container' => '',
+                'fallback_cb' => false
             ));
 
           else:
 
             wp_nav_menu(array(
-              'menu_class' => 'nav navbar-nav',
-              'container' => '',
-              'fallback_cb' => false
+                'menu_class' => 'nav navbar-nav',
+                'container' => '',
+                'fallback_cb' => false
             ));
 
           endif;
 
           get_search_form();
-
           ?>
         </div>
       </div>
     </nav>
 
     <?php
-
     // If a Custom Header image is selected, show it just on the front page
     if (get_header_image() && is_front_page()) :
-
       ?>
       <div class="carousel"><img src="<?php header_image(); ?>" height="<?php echo get_custom_header()->height; ?>" width="<?php echo get_custom_header()->width; ?>" alt="" /></div>
       <?php
-
     // Do not show the page title on the Front page
     elseif (!is_front_page()) :
-
       ?>
       <div id="page-banner">
         <div class="container">
           <h1>
             <?php
-
             $blog_title = __('Blog', 'okfnwp');
 
             if (is_single() || is_page()) :
@@ -127,7 +117,6 @@
               $search_title = sprintf(__('Search Results for: %1$s', 'okfnwp'), get_search_query());
               echo $search_title;
             endif;
-
             ?>
           </h1>
         </div>

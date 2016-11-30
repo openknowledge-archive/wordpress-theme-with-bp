@@ -114,6 +114,14 @@ class OKFNThemeOptions {
     );
 
     add_settings_field(
+            "okfnwp_discuss_id", // id
+            __('Discuss Page', 'okfnwp'), // title
+            array($this, 'okfnwp_discuss_id_callback'), // callback
+            'theme-options-admin', // page
+            'theme_options_setting_section_social' // section
+    );
+
+    add_settings_field(
             "okfnwp_meta", // id
             __('Custom Meta Tags', 'okfnwp'), // title
             array($this, 'okfnwp_meta_callback'), // callback
@@ -150,6 +158,10 @@ class OKFNThemeOptions {
 
     if (isset($input['okfnwp_fb_id'])) {
       $sanitary_values['okfnwp_fb_id'] = sanitize_text_field($input['okfnwp_fb_id']);
+    }
+
+    if (isset($input['okfnwp_discuss_id'])) {
+      $sanitary_values['okfnwp_discuss_id'] = sanitize_text_field($input['okfnwp_discuss_id']);
     }
 
     if (isset($input['okfnwp_meta'])) {
@@ -212,6 +224,7 @@ class OKFNThemeOptions {
 //        _e('<p>For the list at http://lists.okfn.org/mailman/subscribe/XYZ, this should be XYZ</p>');
 //    }
 
+
   public function okfnwp_twitter_id_callback() {
     $current_val = $this->theme_options['okfnwp_twitter_id'];
     $old_val = get_option('okfnwp_twitter_id');
@@ -237,6 +250,20 @@ class OKFNThemeOptions {
     printf('<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_fb_id]" id="okfnwp_fb_id" value="%s">', isset($current_val) ? esc_attr($current_val) : '');
     ?>
     <p><?php _e('Facebook page name. If the URL to your page is https://www.facebook.com/OKFNetwork, then use OKFNetwork'); ?></p>
+    <?php
+  }
+
+  public function okfnwp_discuss_id_callback() {
+    $current_val = $this->theme_options['okfnwp_discuss_id'];
+    $old_val = get_option('okfnwp_discuss_id');
+
+    if (!isset($current_val) && isset($old_val)):
+      $current_val = $old_val;
+    endif;
+
+    printf('<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_discuss_id]" id="okfnwp_discuss_id" value="%s">', isset($current_val) ? esc_attr($current_val) : '');
+    ?>
+    <p><?php _e('Discuss (discuss.okfn.org) page name. If the URL to your page is https://discuss.okfn.org/c/local-groups/okbr, then use c/local-groups/okbr'); ?></p>
     <?php
   }
 
