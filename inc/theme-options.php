@@ -29,6 +29,12 @@ $options = array(
     "type" => "text"
   ),
   array(
+    "name" => "Discuss Page",
+    "desc" => "discuss.okfn.org page name. If the URL to your page is https://discuss.okfn.org/c/local-groups/okbr, then use c/local-groups/okbr",
+    "id"   => $shortname . "_discuss_id",
+    "type" => "text"
+  ),
+  array(
     "name" => "Twitter Handle",
     "desc" => "Twitter handle to link to. Example: If your handle is @okfn, use okfn",
     "id"   => $shortname . "_twitter_id",

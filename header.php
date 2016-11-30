@@ -36,7 +36,8 @@
       </div>
       <nav id="header-nav" role="navigation" class="hidden-xs">
         <div id="nav-social" class="social-links">
-        <a class="facebook" href="https://www.facebook.com/<?php echo get_option('okfnwp_fb_id', 'OKFNetwork'); ?>"><i class="fa fa-facebook fa-lg"></i></a>
+          <a class="facebook" href="https://discuss.okfn.org/<?php echo get_option('okfnwp_discuss_id', 'OKFNetwork'); ?>"><i class="fa fa-comment-o fa-lg"></i></a>
+          <a class="facebook" href="https://www.facebook.com/<?php echo get_option('okfnwp_fb_id', 'OKFNetwork'); ?>"><i class="fa fa-facebook fa-lg"></i></a>
           <a class="twitter" href="https://twitter.com/<?php echo get_option('okfnwp_twitter_id', 'okfn'); ?>"><i class="fa fa-twitter fa-lg"></i></a>
         </div>
       </nav>
