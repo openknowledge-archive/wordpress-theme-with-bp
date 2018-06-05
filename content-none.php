@@ -8,9 +8,9 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('post'); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( 'post' ); ?>>
   <div class="entry-content">
-	<p><?php _e('Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'okfnwp'); ?></p>
+	<p><?php _e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'okfnwp' ); ?></p>
 	<?php get_search_form(); ?>
   </div>
 </article>

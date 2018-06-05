@@ -4,12 +4,12 @@
 ?>
 <form class="navbar-form" action="<?php echo home_url(); ?>/" method="get" role="search">
   <div class="input-group input-group-search">
-    <input type="text" name="s" class="form-control" value="<?php the_search_query(); ?>">
-    <span class="input-group-btn">
-      <button type="submit" class="btn btn-default">
-        <span class="fa fa-lg fa-search"></span>
-        <span class="sr-only"><?php _e('Submit', 'okfnwp'); ?></span>
-      </button>
-    </span>
+	<input type="text" name="s" class="form-control" value="<?php the_search_query(); ?>">
+	<span class="input-group-btn">
+	  <button type="submit" class="btn btn-default">
+		<span class="fa fa-lg fa-search"></span>
+		<span class="sr-only"><?php _e( 'Submit', 'okfnwp' ); ?></span>
+	  </button>
+	</span>
   </div>
 </form>
