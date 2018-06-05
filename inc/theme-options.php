@@ -24,8 +24,8 @@ class OKFNThemeOptions {
 		?>
 
 		<div class="wrap">
-		<h2><?php _e( 'Theme Options', 'okfnwp' ); ?></h2>
-		<p><?php _e( 'Available options for the Open Knowledge International WordPress theme', 'okfnwp' ); ?></p>
+		<h2><?php esc_html_e( 'Theme Options', 'okfnwp' ); ?></h2>
+		<p><?php esc_html_e( 'Available options for the Open Knowledge International WordPress theme', 'okfnwp' ); ?></p>
 		<?php settings_errors(); ?>
 
 		<form method="POST" action="options.php">
@@ -55,14 +55,14 @@ class OKFNThemeOptions {
 
 		add_settings_section(
 			'theme_options_setting_section_social', // id
-			__( 'Social Media', 'okfnwp' ), // title
+			esc_html__( 'Social Media', 'okfnwp' ), // title
 			array( $this, 'theme_options_section_social' ), // callback
 			'theme-options-admin' // page
 		);
 
 		add_settings_section(
 			'theme_options_setting_section_meta', // id
-			__( 'Meta Information', 'okfnwp' ), // title
+			esc_html__( 'Meta Information', 'okfnwp' ), // title
 			array( $this, 'theme_options_section_meta' ), // callback
 			'theme-options-admin' // page
 		);
@@ -99,7 +99,7 @@ class OKFNThemeOptions {
 
 		add_settings_field(
 			'okfnwp_twitter_id', // id
-			__( 'Twitter Handle', 'okfnwp' ), // title
+			esc_html__( 'Twitter Handle', 'okfnwp' ), // title
 			array( $this, 'okfnwp_twitter_id_callback' ), // callback
 			'theme-options-admin', // page
 			'theme_options_setting_section_social' // section
@@ -107,7 +107,7 @@ class OKFNThemeOptions {
 
 		add_settings_field(
 			'okfnwp_fb_id', // id
-			__( 'Facebook Page', 'okfnwp' ), // title
+			esc_html__( 'Facebook Page', 'okfnwp' ), // title
 			array( $this, 'okfnwp_fb_id_callback' ), // callback
 			'theme-options-admin', // page
 			'theme_options_setting_section_social' // section
@@ -115,7 +115,7 @@ class OKFNThemeOptions {
 
 		add_settings_field(
 			'okfnwp_discuss_id', // id
-			__( 'Discuss Page', 'okfnwp' ), // title
+			esc_html__( 'Discuss Page', 'okfnwp' ), // title
 			array( $this, 'okfnwp_discuss_id_callback' ), // callback
 			'theme-options-admin', // page
 			'theme_options_setting_section_social' // section
@@ -123,7 +123,7 @@ class OKFNThemeOptions {
 
 		add_settings_field(
 			'okfnwp_meta', // id
-			__( 'Custom Meta Tags', 'okfnwp' ), // title
+			esc_html__( 'Custom Meta Tags', 'okfnwp' ), // title
 			array( $this, 'okfnwp_meta_callback' ), // callback
 			'theme-options-admin', // page
 			'theme_options_setting_section_meta' // section
@@ -235,7 +235,7 @@ class OKFNThemeOptions {
 
 		printf( '<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_twitter_id]" id="okfnwp_twitter_id" value="%s">', isset( $current_val ) ? esc_attr( $current_val ) : '' );
 		?>
-		<p><?php _e( 'Twitter handle to link to. Example: If your handle is @okfn, use okfn' ); ?></p>
+		<p><?php esc_html_e( 'Twitter handle to link to. Example: If your handle is @okfn, use okfn' ); ?></p>
 		<?php
   }
 
@@ -249,7 +249,7 @@ class OKFNThemeOptions {
 
 		printf( '<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_fb_id]" id="okfnwp_fb_id" value="%s">', isset( $current_val ) ? esc_attr( $current_val ) : '' );
 		?>
-		<p><?php _e( 'Facebook page name. If the URL to your page is https://www.facebook.com/OKFNetwork, then use OKFNetwork' ); ?></p>
+		<p><?php esc_html_e( 'Facebook page name. If the URL to your page is https://www.facebook.com/OKFNetwork, then use OKFNetwork' ); ?></p>
 		<?php
   }
 
@@ -263,7 +263,7 @@ class OKFNThemeOptions {
 
 		printf( '<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_discuss_id]" id="okfnwp_discuss_id" value="%s">', isset( $current_val ) ? esc_attr( $current_val ) : '' );
 		?>
-		<p><?php _e( 'Discuss (discuss.okfn.org) page name. If the URL to your page is https://discuss.okfn.org/c/local-groups/okbr, then use c/local-groups/okbr' ); ?></p>
+		<p><?php esc_html_e( 'Discuss (discuss.okfn.org) page name. If the URL to your page is https://discuss.okfn.org/c/local-groups/okbr, then use c/local-groups/okbr' ); ?></p>
 		<?php
   }
 
@@ -277,7 +277,7 @@ class OKFNThemeOptions {
 
 		printf( '<textarea cols="60" rows="10" class="regular-text" type="text" name="theme_options_option_name[okfnwp_meta]" id="okfnwp_meta">%s</textarea>', isset( $current_val ) ? esc_attr( $current_val ) : '' );
 		?>
-		<p><?php _e( 'Enter any content you would like added in the &lt;head&gt; section of every page &mdash; useful for meta tags or custom validation codes for social media and analytics services.' ); ?></p>
+		<p><?php esc_html_e( 'Enter any content you would like added in the &lt;head&gt; section of every page &mdash; useful for meta tags or custom validation codes for social media and analytics services.' ); ?></p>
 		<?php
   }
 

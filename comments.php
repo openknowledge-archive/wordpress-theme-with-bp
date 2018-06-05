@@ -22,15 +22,15 @@ if ( post_password_required() ) {
 
 	<h2 class="comments-title">
 	  <?php
-	  printf( _n( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'okfnwp' ), number_format_i18n( get_comments_number() ), get_the_title() );
+	  esc_html( printf( esc_html( _n( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'okfnwp' ) ), esc_html( number_format_i18n( get_comments_number() ) ), get_the_title() ) );
 	  ?>
 	</h2>
 
 	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 	  <nav id="comment-nav-above" class="navigation comment-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'okfnwp' ); ?></h1>
-		<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'okfnwp' ) ); ?></div>
-		<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'okfnwp' ) ); ?></div>
+		<h1 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'okfnwp' ); ?></h1>
+		<div class="nav-previous"><?php previous_comments_link( esc_html__( '&larr; Older Comments', 'okfnwp' ) ); ?></div>
+		<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments &rarr;', 'okfnwp' ) ); ?></div>
 	  </nav><!-- #comment-nav-above -->
 	<?php endif; // Check for comment navigation. ?>
 
@@ -48,14 +48,14 @@ if ( post_password_required() ) {
 
 	<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 	  <nav id="comment-nav-below" class="navigation comment-navigation" role="navigation">
-		<h1 class="screen-reader-text"><?php _e( 'Comment navigation', 'okfnwp' ); ?></h1>
-		<div class="nav-previous"><?php previous_comments_link( __( '&larr; Older Comments', 'okfnwp' ) ); ?></div>
-		<div class="nav-next"><?php next_comments_link( __( 'Newer Comments &rarr;', 'okfnwp' ) ); ?></div>
+		<h1 class="screen-reader-text"><?php esc_html_e( 'Comment navigation', 'okfnwp' ); ?></h1>
+		<div class="nav-previous"><?php previous_comments_link( esc_html__( '&larr; Older Comments', 'okfnwp' ) ); ?></div>
+		<div class="nav-next"><?php next_comments_link( esc_html__( 'Newer Comments &rarr;', 'okfnwp' ) ); ?></div>
 	  </nav><!-- #comment-nav-below -->
 	<?php endif; // Check for comment navigation. ?>
 
 	<?php if ( ! comments_open() ) : ?>
-	  <p class="no-comments"><?php _e( 'Comments are closed.', 'okfnwp' ); ?></p>
+	  <p class="no-comments"><?php esc_html_e( 'Comments are closed.', 'okfnwp' ); ?></p>
 	<?php endif; ?>
 
   <?php endif; // have_comments() ?>

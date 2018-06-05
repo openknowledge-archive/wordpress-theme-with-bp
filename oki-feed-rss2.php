@@ -4,10 +4,10 @@
  *
  * @package WordPress
  */
-header( 'Content-Type: ' . feed_content_type( 'rss2' ) . '; charset=' . get_option( 'blog_charset' ), true );
+header( 'Content-Type: ' . feed_content_type( 'rss2' ) . '; charset=' . esc_attr( get_bloginfo( 'charset' ) ), true );
 $more = 1;
 
-echo '<?xml version="1.0" encoding="' . get_option( 'blog_charset' ) . '"?' . '>';
+echo '<?xml version="1.0" encoding="' . esc_attr( get_bloginfo( 'charset' ) ) . '"?' . '>';
 
 /**
  * Fires between the xml and rss tags in a feed.
@@ -41,7 +41,7 @@ do_action( 'rss_tag_pre', 'rss2' );
 	<atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml" />
 	<link><?php bloginfo_rss( 'url' ); ?></link>
 	<description><?php bloginfo_rss( 'description' ); ?></description>
-	<lastBuildDate><?php echo mysql2date( 'D, d M Y H:i:s +0000', get_lastpostmodified( 'GMT' ), false ); ?></lastBuildDate>
+	<lastBuildDate><?php echo esc_html( mysql2date( 'D, d M Y H:i:s +0000', get_lastpostmodified( 'GMT' ), false ) ); ?></lastBuildDate>
 	<language><?php bloginfo_rss( 'language' ); ?></language>
 	<sy:updatePeriod>
 	<?php
@@ -55,7 +55,7 @@ do_action( 'rss_tag_pre', 'rss2' );
 	   * @param string $duration The update period. Accepts 'hourly', 'daily', 'weekly', 'monthly',
 	   *                         'yearly'. Default 'hourly'.
 	   */
-	  echo apply_filters( 'rss_update_period', $duration );
+	  echo esc_html( apply_filters( 'rss_update_period', $duration ) );
 	  ?>
 	  </sy:updatePeriod>
 	<sy:updateFrequency>
@@ -70,7 +70,7 @@ do_action( 'rss_tag_pre', 'rss2' );
 	   * @param string $frequency An integer passed as a string representing the frequency
 	   *                          of RSS updates within the update period. Default '1'.
 	   */
-	  echo apply_filters( 'rss_update_frequency', $frequency );
+	  echo esc_html( apply_filters( 'rss_update_frequency', $frequency ) );
 	  ?>
 	  </sy:updateFrequency>
 	<?php
@@ -90,13 +90,13 @@ the_post();
 		<?php if ( get_comments_number() || comments_open() ) : ?>
 		  <comments><?php comments_link_feed(); ?></comments>
 		<?php endif; ?>
-		<pubDate><?php echo mysql2date( 'D, d M Y H:i:s +0000', get_post_time( 'Y-m-d H:i:s', true ), false ); ?></pubDate>
+		<pubDate><?php echo esc_html( mysql2date( 'D, d M Y H:i:s +0000', get_post_time( 'Y-m-d H:i:s', true ), false ) ); ?></pubDate>
 		<dc:creator><![CDATA[<?php the_author(); ?>]]></dc:creator>
 		<?php
 		$gravatar_img = okfn_get_avatar_img_url( 264 );
 		if ( ! empty( $gravatar_img ) ) :
 		  ?>
-		  <enclosure url="<?php echo $gravatar_img; ?>" length="N/A" type="image/jpeg" />
+		  <enclosure url="<?php echo esc_attr( $gravatar_img ); ?>" length="N/A" type="image/jpeg" />
 		  <?php
 		endif;
 		the_category_rss( 'rss2' )
@@ -108,14 +108,14 @@ the_post();
 		  <description><![CDATA[<?php the_excerpt_rss(); ?>]]></description>
 		  <?php $content = get_the_content_feed( 'rss2' ); ?>
 		  <?php if ( strlen( $content ) > 0 ) : ?>
-			<content:encoded><![CDATA[<?php echo $content; ?>]]></content:encoded>
+			<content:encoded><![CDATA[<?php echo wp_kses_post( $content ); ?>]]></content:encoded>
 		  <?php else : ?>
 			<content:encoded><![CDATA[<?php the_excerpt_rss(); ?>]]></content:encoded>
 		  <?php endif; ?>
 		<?php endif; ?>
 		<?php if ( get_comments_number() || comments_open() ) : ?>
 		  <wfw:commentRss><?php echo esc_url( get_post_comments_feed_link( null, 'rss2' ) ); ?></wfw:commentRss>
-		  <slash:comments><?php echo get_comments_number(); ?></slash:comments>
+		  <slash:comments><?php echo esc_html( get_comments_number() ); ?></slash:comments>
 		<?php endif; ?>
 		<?php rss_enclosure(); ?>
 		<?php

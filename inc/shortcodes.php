@@ -32,20 +32,17 @@ add_shortcode( 'pseudosidebar', 'pseudosidebar_shortcode' );
 **********************************************************************************************/
 
 function carousel_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'class' => '',
 		 ), $atts
-		)
 		);
-   return '<div id="myCarousel" class="carousel slide ' . $class . '"><div class="carousel-inner">' . do_shortcode( $content ) . '</div><a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a><a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a></div><script>$("div.text-slide, div.calendar-slide").parent().addClass("not-photo");</script>';
+   return '<div id="myCarousel" class="carousel slide ' . $args['class'] . '"><div class="carousel-inner">' . do_shortcode( $args['content'] ) . '</div><a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a><a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a></div><script>$("div.text-slide, div.calendar-slide").parent().addClass("not-photo");</script>';
 }
 add_shortcode( 'carousel', 'carousel_shortcode' );
 
 function carousel_slide_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'img'      => '',
 			 'text'     => '',
@@ -54,27 +51,26 @@ function carousel_slide_shortcode( $atts ) {
 			 'heading'  => '',
 			 'calendar' => '',
 		 ), $atts
-		)
 		);
 
-		if ( ! empty( $calendar ) ) {
-$googleCalendar = '[google-calendar-events id="' . $calendar . '" type="ajax"]';}
+		if ( ! empty( $args['calendar'] ) ) {
+$googleCalendar = '[google-calendar-events id="' . $args['calendar'] . '" type="ajax"]';}
 
-		$slideOpen = '<div class="item ' . $class . '">';
-		if ( ! empty( $img ) ) {
-$slideContent = '<img src="' . $img . '">';} elseif ( ! empty( $text ) ) {
-		$slideContent = '<div class="text-slide">' . $text . '</div>';} elseif ( ! empty( $calendar ) ) {
+		$slideOpen = '<div class="item ' . $args['class'] . '">';
+		if ( ! empty( $args['img'] ) ) {
+$slideContent = '<img src="' . $args['img'] . '">';} elseif ( ! empty( $args['text'] ) ) {
+		$slideContent = '<div class="text-slide">' . $args['text'] . '</div>';} elseif ( ! empty( $args['calendar'] ) ) {
 		$slideContent = '<div class="calendar-slide">' . do_shortcode( $googleCalendar ) . '</div>';} else {
 			$slideContent = '<img src="http://farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png">';
 };
-		if ( ! empty( $caption ) ) {
+		if ( ! empty( $args['caption'] ) ) {
 				$slideCaptionOpen = '<div class="carousel-caption">';
 };
-		if ( ! empty( $heading ) ) {
-				$slideHeading = '<h2>' . $heading . '</h2>';
+		if ( ! empty( $args['caption'] ) ) {
+				$slideHeading = '<h2>' . $args['caption'] . '</h2>';
 };
-		if ( ! empty( $caption ) ) {
-				$slideCaption = '' . $caption . ' </div>';
+		if ( ! empty( $args['caption'] ) ) {
+				$slideCaption = '' . $args['caption'] . ' </div>';
 };
 		$slideClose = '</div>';
 
@@ -103,14 +99,12 @@ function zcarousel_shortcode( $atts, $content = null ) {
 add_shortcode( 'zcarousel', 'zcarousel_shortcode' );
 
 function zcarousel_slide_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'img' => '//farm8.staticflickr.com/7174/6554801385_83acdc501d_o_d.png',
 		 ), $atts
-		)
 		);
-  return 'data.push({"url":"' . $img . '","caption":"' . $content . '"});';
+  return 'data.push({"url":"' . $args['img'] . '","caption":"' . $content . '"});';
 }
 add_shortcode( 'zslide', 'zcarousel_slide_shortcode' );
 
@@ -127,18 +121,16 @@ add_shortcode( 'zslide', 'zcarousel_slide_shortcode' );
 add_shortcode( 'banner', 'banner_shortcode' );
 
 function banner_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args          = shortcode_atts(
 		 array(
 			 'bg'       => '//assets.okfn.org/web/images/banner.png',
 			 'height'   => '320',
 			 'bgcolour' => 'd4d4d4',
 			 'class'    => '',
 		 ), $atts
-		)
 		);
-		$padheight = $height - 40;
-		return '<div class="static-banner ' . $class . '" style="background-image:url(' . $bg . '); height:' . $padheight . 'px; background-color:#' . $bgcolour . ';"><div class="inner">' . do_shortcode( $content ) . '</div></div>';
+		$padheight = $args['height'] - 40;
+		return '<div class="static-banner ' . $args['class'] . '" style="background-image:url(' . $args['bg'] . '); height:' . $padheight . 'px; background-color:#' . $args['bgcolour'] . ';"><div class="inner">' . do_shortcode( $content ) . '</div></div>';
 		}
 
 add_shortcode( 'banner', 'banner_shortcode' );
@@ -183,38 +175,34 @@ add_shortcode( 'fullwidth', 'fullwidth_shortcode' );
 **********************************************************************************************/
 
 function row_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args   = shortcode_atts(
 		 array(
 			 'class' => '',
 			 'style' => '',
 		 ), $atts
-		)
 		);
 	$styles = '';
-	if ( ! empty( $style ) ) {
-$styles = ' style="' . $style . '"';}
+	if ( ! empty( $args['style'] ) ) {
+$styles = ' style="' . $args['style'] . '"';}
 
-		return '<div class="row ' . $class . '"' . $styles . '>' . do_shortcode( $content ) . '</div>';
+		return '<div class="row ' . $args['class'] . '"' . $styles . '>' . do_shortcode( $content ) . '</div>';
 }
 add_shortcode( 'row', 'row_shortcode' );
 
 function column_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args   = shortcode_atts(
 		 array(
 			 'span'   => '12',
 			 'offset' => '0',
 			 'class'  => '',
 			 'style'  => '',
 		 ), $atts
-		)
 		);
 	$styles = '';
-		if ( ! empty( $style ) ) {
-$styles = ' style="' . $style . '"';}
+		if ( ! empty( $args['style'] ) ) {
+$styles = ' style="' . $args['style'] . '"';}
 
-		return '<div class="span' . $span . ' offset' . $offset . ' ' . $class . '"' . $styles . '>' . do_shortcode( $content ) . '</div>';
+		return '<div class="span' . $args['span'] . ' offset' . $args['offset'] . ' ' . $args['class'] . '"' . $styles . '>' . do_shortcode( $content ) . '</div>';
 		}
 
 add_shortcode( 'column', 'column_shortcode' );
@@ -245,20 +233,17 @@ add_shortcode( 'clear', 'clear_shortcode' );
 **********************************************************************************************/
 
 function gridlist_shortcode( $atts, $content = null ) {
-	 extract(
-		  shortcode_atts(
+	 $args = shortcode_atts(
 		  array(
 			  'columns' => '3',
 		  ), $atts
-		 )
 		 );
-   return '<dl class="grid-list columns' . $columns . '">' . do_shortcode( $content ) . '<br style="clear:both;" /></dl>';
+   return '<dl class="grid-list columns' . $args['columns'] . '">' . do_shortcode( $content ) . '<br style="clear:both;" /></dl>';
 }
 add_shortcode( 'gl', 'gridlist_shortcode' );
 
 function gridlist_item_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'title'       => '',
 			 'description' => '',
@@ -266,27 +251,26 @@ function gridlist_item_shortcode( $atts ) {
 			 'icon'        => '',
 			 'image'       => '',
 		 ), $atts
-		)
 		);
 
-		if ( ! empty( $icon ) && ! empty( $link ) ) {
-		return '<a href="' . $link . '" class="well"><dt><img src="' . $icon . '" alt="' . $title . '" class="icon"><div class="title">' . $title . '</div></dt>
-							<dd>' . $description . '</dd></a>';
-		} elseif ( ! empty( $image ) && ! empty( $link ) ) {
-		return '<a href="' . $link . '" class="well"><dt><span class="image"><img src="' . $image . '" alt="' . $title . '"></span><h3>' . $title . '</h3></dt>
-							<dd>' . $description . '</dd></a>';
-		} elseif ( ! empty( $link ) ) {
-		return '<a href="' . $link . '" class="well"><dt>' . $title . '</dt>
-							<dd>' . $description . '</dd></a>';
-		} elseif ( ! empty( $icon ) ) {
-		return '<div class="well"><dt><img src="' . $icon . '" alt="' . $title . '" class="icon"><div class="title">' . $title . '</div></dt>
-							<dd>' . $description . '</dd></div>';
-		} elseif ( ! empty( $image ) ) {
-		return '<div class="well"><dt><span class="image"><img src="' . $image . '" alt="' . $title . '"></span><h3>' . $title . '</h3></dt>
-							<dd>' . $description . '</dd></div>';
+		if ( ! empty( $args['icon'] ) && ! empty( $args['link'] ) ) {
+		return '<a href="' . $args['link'] . '" class="well"><dt><img src="' . $args['icon'] . '" alt="' . $args['title'] . '" class="icon"><div class="title">' . $args['title'] . '</div></dt>
+							<dd>' . $args['description'] . '</dd></a>';
+		} elseif ( ! empty( $args['image'] ) && ! empty( $args['link'] ) ) {
+		return '<a href="' . $args['link'] . '" class="well"><dt><span class="image"><img src="' . $args['image'] . '" alt="' . $args['title'] . '"></span><h3>' . $args['title'] . '</h3></dt>
+							<dd>' . $args['description'] . '</dd></a>';
+		} elseif ( ! empty( $args['link'] ) ) {
+		return '<a href="' . $args['link'] . '" class="well"><dt>' . $args['title'] . '</dt>
+							<dd>' . $args['description'] . '</dd></a>';
+		} elseif ( ! empty( $args['icon'] ) ) {
+		return '<div class="well"><dt><img src="' . $args['icon'] . '" alt="' . $args['title'] . '" class="icon"><div class="title">' . $args['title'] . '</div></dt>
+							<dd>' . $args['description'] . '</dd></div>';
+		} elseif ( ! empty( $args['image'] ) ) {
+		return '<div class="well"><dt><span class="image"><img src="' . $args['image'] . '" alt="' . $args['title'] . '"></span><h3>' . $args['title'] . '</h3></dt>
+							<dd>' . $args['description'] . '</dd></div>';
 		} else {
-		return '<div class="well"><dt>' . $title . '</dt>
-							<dd>' . $description . '</dd></div>';
+		return '<div class="well"><dt>' . $args['title'] . '</dt>
+							<dd>' . $args['description'] . '</dd></div>';
 		}
 }
 add_shortcode( 'gli', 'gridlist_item_shortcode' );
@@ -301,8 +285,7 @@ add_shortcode( 'gli', 'gridlist_item_shortcode' );
 
 if ( function_exists( 'base_rss_feed' ) && ! function_exists( 'base_rss_shortcode' ) ) {
 	function base_rss_shortcode( $atts ) {
-		extract(
-			shortcode_atts(
+		$args = shortcode_atts(
 			array(
 				'size'  => '10',
 				'feed'  => 'http://wordpress.org/news/feed/',
@@ -311,20 +294,19 @@ if ( function_exists( 'base_rss_feed' ) && ! function_exists( 'base_rss_shortcod
 				'id'    => '1',
 				'type'  => '',
 			), $atts
-			)
 			);
 
-		$content = base_rss_feed( $size, $feed, $date );
-		if ( $type == 'ticker' ) {
-			return '<div id="rss' . $id . '" class="rss ticker carousel slide size' . $size . ' ' . $class . '">' . $content . '
-			<a class="carousel-control left" href="#rss' . $id . '" data-slide="prev">&lsaquo;</a>
-			<a class="carousel-control right" href="#rss' . $id . '" data-slide="next">&rsaquo;</a></div>
+		$content = base_rss_feed( $args['size'], $args['feed'], $args['date'] );
+		if ( 'ticker' == $args['type'] ) {
+			return '<div id="rss' . $args['id'] . '" class="rss ticker carousel slide size' . $args['size'] . ' ' . $args['class'] . '">' . $content . '
+			<a class="carousel-control left" href="#rss' . $args['id'] . '" data-slide="prev">&lsaquo;</a>
+			<a class="carousel-control right" href="#rss' . $args['id'] . '" data-slide="next">&rsaquo;</a></div>
 			<script>
-			$("#rss' . $id . ' .feedlist li").addClass("item");
-			$("#rss' . $id . ' .feedlist li:first-of-type").addClass("active");
+			$("#rss' . $args['id'] . ' .feedlist li").addClass("item");
+			$("#rss' . $args['id'] . ' .feedlist li:first-of-type").addClass("active");
 			</script>';
 		} else {
-			return '<div class="rss size' . $size . ' ' . $class . '">' . $content . '</div>';
+			return '<div class="rss size' . $args['size'] . ' ' . $args['class'] . '">' . $content . '</div>';
 		}
 	}
 	add_shortcode( 'rss', 'base_rss_shortcode' );
@@ -342,37 +324,33 @@ if ( function_exists( 'base_rss_feed' ) && ! function_exists( 'base_rss_shortcod
 **********************************************************************************************/
 
 function accordions_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args       = shortcode_atts(
 		 array(
 			 'class' => 'accordion',
 		 ), $atts
-		)
 		);
 	 static $id = 0;
 	 $id++;
-   return '<div id="accordion' . $id . '" class="' . $class . '">' . do_shortcode( $content ) . '</div>';
+   return '<div id="accordion' . $id . '" class="' . $args['class'] . '">' . do_shortcode( $content ) . '</div>';
 }
 add_shortcode( 'accordions', 'accordions_shortcode' );
 
 function accordion_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args                = shortcode_atts(
 		 array(
 			 'heading' => 'Please enter a heading attribute like [accordion heading="My Heading"]',
 			 'class'   => '',
 		 ), $atts
-		)
 		);
 		static $collapse = 0;
 	  $collapse++;
 		return '<div class="accordion-group">
 		         <div class="accordion-heading">
 						   <a class="accordion-toggle" href="#collapse' . $collapse . '" data-toggle="collapse">
-							   ' . $heading . '
+							   ' . $args['heading'] . '
 							</a>
 						 </div>
-						 <div id="collapse' . $collapse . '" class="accordion-body collapse ' . $class . '">
+						 <div id="collapse' . $collapse . '" class="accordion-body collapse ' . $args['class'] . '">
 						  <div class="accordion-inner">
 							' . do_shortcode( $content ) . '
 							</div>
@@ -389,27 +367,25 @@ add_shortcode( 'accordion', 'accordion_shortcode' );
 **********************************************************************************************/
 
 function sticky_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'scroll' => '65',
 			 'class'  => 'subnav',
 			 'id'     => '$el',
 		 ), $atts
-		)
 		);
  return '<script>$(window).scroll(function(e){
-  ' . $id . " = $('." . $class . "');
-  if ($(this).scrollTop() > " . $scroll . ' && ' . $id . ".css('position') != 'fixed'){
-    $('." . $class . "').css({'position': 'fixed', 'top': '0px'});
+  ' . $args['id'] . " = $('." . $args['class'] . "');
+  if ($(this).scrollTop() > " . $scroll . ' && ' . $args['id'] . ".css('position') != 'fixed'){
+    $('." . $args['class'] . "').css({'position': 'fixed', 'top': '0px'});
 		$('body').removeClass('top');
   }
-	if ($(this).scrollTop() < " . $scroll . ' && ' . $id . ".css('position') == 'fixed') {
-	  $('." . $class . "').css({'position': 'absolute', 'top': '0px'});
+	if ($(this).scrollTop() < " . $scroll . ' && ' . $args['id'] . ".css('position') == 'fixed') {
+	  $('." . $args['class'] . "').css({'position': 'absolute', 'top': '0px'});
 		$('body').addClass('top');
 	}
 });
-$('body').addClass('sticky-" . $class . " top');
+$('body').addClass('sticky-" . $args['class'] . " top');
 </script>";
 }
 add_shortcode( 'sticky', 'sticky_shortcode' );
@@ -423,16 +399,14 @@ add_shortcode( 'sticky', 'sticky_shortcode' );
 
 function pippin_login_form_shortcode( $atts, $content = null ) {
 
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'redirect' => '',
 		 ), $atts
-		)
 		);
 
 	if ( ! is_user_logged_in() ) {
-		if ( $redirect ) {
+		if ( $args['redirect'] ) {
 			$redirect_url = $redirect;
 		} else {
 			$redirect_url = get_permalink();
@@ -459,20 +433,18 @@ add_shortcode( 'loginform', 'pippin_login_form_shortcode' );
 **********************************************************************************************/
 
 function menupod_shortcode( $atts, $content = null ) {
-	 extract(
-		  shortcode_atts(
+	 $args = shortcode_atts(
 		  array(
 			  'icon'       => 'cog',
 			  'link'       => '#',
 			  'heading'    => 'Heading Here',
 			  'subheading' => '',
 		  ), $atts
-		 )
 		 );
    return '<div class="okfn-dropdown">
-		 <a href="' . $link . '" class="background-' . $icon . '">
-			<h5>' . $heading . '</h5>
-			<p>' . $subheading . '</p>
+		 <a href="' . $args['link'] . '" class="background-' . $args['icon'] . '">
+			<h5>' . $args['heading'] . '</h5>
+			<p>' . $args['subheading'] . '</p>
 		</a>
 		<div class="okfn-dropdown-items">'
 		. do_shortcode( $content ) .
@@ -482,16 +454,14 @@ function menupod_shortcode( $atts, $content = null ) {
 add_shortcode( 'menupod', 'menupod_shortcode' );
 
 function menupoditem_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'text' => 'Text here',
 			 'link' => '#',
 		 ), $atts
-		)
 		);
 
-		return '<a href="' . $link . '">' . $text . '</a>';
+		return '<a href="' . $args['link'] . '">' . $args['text'] . '</a>';
 		}
 
 add_shortcode( 'menupoditem', 'menupoditem_shortcode' );
@@ -504,25 +474,23 @@ add_shortcode( 'menupoditem', 'menupoditem_shortcode' );
 **********************************************************************************************/
 
 function latest_posts_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'postnumber' => '3',
 			 'category'   => '',
 			 'class'      => '',
 		 ), $atts
-		)
 		);
 
 	$q = new WP_Query(
 			array(
 				'orderby'        => 'date',
-				'posts_per_page' => '' . $postnumber . '',
-				'category_name'  => '' . $category . '',
+				'posts_per_page' => '' . $args['postnumber'] . '',
+				'category_name'  => '' . $args['category'] . '',
 			)
 		);
 
-		$list = '<ul class="latest-posts posts' . $postnumber . ' ' . $class . '">';
+		$list = '<ul class="latest-posts posts' . $args['postnumber'] . ' ' . $args['class'] . '">';
 
 		while ( $q->have_posts() ) :
 $q->the_post();
@@ -561,32 +529,30 @@ add_shortcode( 'latest_posts', 'latest_posts_shortcode' );
 **********************************************************************************************/
 
 function fbanner_shortcode( $atts, $content = null ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'id'   => '50136062@N03',
 			 'set'  => '72157631690090162',
 			 'link' => '',
 		 ), $atts
-		)
 		);
 
-		if ( $link == y ) {
-		$open = '<a href="//www.flickr.com/photos/' . $id . '/sets/' . $set . '/show/" class="flickr banner"><span class="inner">';
+		if ( y == $args['link'] ) {
+		$open = '<a href="//www.flickr.com/photos/' . $args['id'] . '/sets/' . $args['set'] . '/show/" class="flickr banner"><span class="inner">';
 		} else {
 		$open = '<div class="flickr banner"><div class="inner">';
 		}
 		ob_start();
 		get_flickrRSS(
 			array(
-				'set'       => $set,
+				'set'       => $args['set'],
 				'num_items' => 18,
 				'type'      => 'set',
-				'id'        => $id,
+				'id'        => $args['id'],
 			)
 		);
 		$images = ob_get_clean();
-		if ( $link == y ) {
+		if ( y == $args['link'] ) {
 		$close = '<div class="text">' . do_shortcode( $content ) . '</div></span></a>';
 		} else {
 		$close = '<div class="text">' . do_shortcode( $content ) . '</div></div></div>';
@@ -604,18 +570,16 @@ add_shortcode( 'fbanner', 'fbanner_shortcode' );
 **********************************************************************************************/
 
 function himg_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'image'  => '',
 			 'break'  => '',
 			 'width'  => '340',
 			 'offset' => '0',
 		 ), $atts
-		)
 		);
-		if ( ! empty( $image ) ) {
-$bgimg = 'style="background-image:url(' . $image . '); background-position: ' . $offset . 'px bottom;"';} else {
+		if ( ! empty( $args['image'] ) ) {
+$bgimg = 'style="background-image:url(' . $args['image'] . '); background-position: ' . $offset . 'px bottom;"';} else {
 		$bgimg = '';}
 	  if ( ! empty( $break ) ) {
 			return '<div class="himg" ' . $bgimg . '></div><style>#content h1.pagetitle {position:absolute;right:30px;top:10px;width:' . $width . 'px;height:96px;overflow:hidden;text-align:right;text-transform:uppercase;font-size:36px;line-height:31px;}#content h1.pagetitle:first-line {color:#6a6a6a;}</style><script>var html = $(".pagetitle").html();
@@ -635,29 +599,27 @@ add_shortcode( 'himg', 'himg_shortcode' );
 **********************************************************************************************/
 
 function mailman_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'domain' => 'http://lists.okfn.org',
 			 'list'   => '',
 			 'button' => 'Subscribe',
 			 'popup'  => '',
 		 ), $atts
-		)
 		);
 
-		if ( ! empty( $popup ) ) {
-		$mailman = '<div class="' . $popup . ' mailman-popup"><div class="icon"></div><p>' . __( 'Get updates from' ) . ' ' . get_bloginfo( 'sitename' ) . ' ' . __( 'in your inbox' ) . '</p><form method="post" action="' . $domain . '/mailman/subscribe/' . $list . '">
+		if ( ! empty( $args['popup'] ) ) {
+		$mailman = '<div class="' . $args['popup'] . ' mailman-popup"><div class="icon"></div><p>' . __( 'Get updates from' ) . ' ' . get_bloginfo( 'sitename' ) . ' ' . __( 'in your inbox' ) . '</p><form method="post" action="' . $args['domain'] . '/mailman/subscribe/' . $args['list'] . '">
 <div class="field"><input name="email" type="email" placeholder="your email address"></div>
 <input type="submit" name="email-button" value= "' . $button . '" class="btn btn-large btn-inverse">
 </form></div>';
 		} else {
-$mailman = '<form method="post" action="' . $domain . '/mailman/subscribe/' . $list . '">
+$mailman = '<form method="post" action="' . $args['domain'] . '/mailman/subscribe/' . $args['list'] . '">
 <label>Name</label>
 <input name="fullname" type="text">
 <label>E-mail Address</label>
 <input name="email" type="email">
-<p style="margin-top:10px;"><input type="submit" name="email-button" value= "' . $button . '"></p>
+<p style="margin-top:10px;"><input type="submit" name="email-button" value= "' . $args['button'] . '"></p>
 </form>';
 		}
 
@@ -678,43 +640,39 @@ add_shortcode( 'mailman', 'mailman_shortcode' );
 **********************************************************************************************/
 
 function imagelist_shortcode( $atts, $content = null ) {
-	 extract(
-		  shortcode_atts(
+	 $args = shortcode_atts(
 		  array(), $atts
-		 )
 		 );
    return '<ul class="image-list">' . do_shortcode( $content ) . '</ul>';
 }
 add_shortcode( 'il', 'imagelist_shortcode' );
 
 function imagelist_item_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'title'       => '',
 			 'description' => '',
 			 'link'        => '',
 			 'image'       => 'http://assets.okfn.org/web/images/blog-placeholder.png',
 		 ), $atts
-		)
 		);
 
-	  if ( ! empty( $link ) ) {
-		return '<a href="' . $link . '">
+	  if ( ! empty( $args['link'] ) ) {
+		return '<a href="' . $args['link'] . '">
 							<li>
-							<span class="image" style="background-image:url(' . $image . ');"></span>
+							<span class="image" style="background-image:url(' . $args['image'] . ');"></span>
 							<span class="text">
-							<h3>' . $title . '</h3>
-							' . $description . '
+							<h3>' . $args['title'] . '</h3>
+							' . $args['description'] . '
 							</span>
 							</li>
 							</a>';
 		} else {
 		return '<li>
-							<span class="image" style="background-image:url(' . $image . ');"></span>
+							<span class="image" style="background-image:url(' . $args['image'] . ');"></span>
 							<span class="text">
-							<h3>' . $title . '</h3>
-							' . $description . '
+							<h3>' . $args['title'] . '</h3>
+							' . $args['description'] . '
 							</span>
 							</li>';
 		}
@@ -729,12 +687,10 @@ add_shortcode( 'ili', 'imagelist_item_shortcode' );
 **********************************************************************************************/
 
 function scrollme_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args = shortcode_atts(
 		 array(
 			 'duration' => '900',
 		 ), $atts
-		)
 		);
  return "<script>
    $('a[href^=\"#\"]').on('click',function (e) {
@@ -743,7 +699,7 @@ function scrollme_shortcode( $atts ) {
 	    \$target = \$(target);
 	    $('html, body').stop().animate({
 	        'scrollTop': \$target.offset().top
-	    }, " . $duration . ", 'swing', function () {
+	    }, " . $args['duration'] . ", 'swing', function () {
 	        window.location.hash = target;
 	    });
 	});
@@ -759,20 +715,18 @@ add_shortcode( 'scrollme', 'scrollme_shortcode' );
 **********************************************************************************************/
 
 function tweeter_shortcode( $atts ) {
-	extract(
-		 shortcode_atts(
+	$args     = shortcode_atts(
 		 array(
 			 'total' => '10',
 			 'user'  => '',
 			 'id'    => '1',
 		 ), $atts
-		)
 		);
-		$open = '<div id="tweeter' . $id . '" class="tweeter carousel slide ticker">';
-	  if ( ! empty( $user ) ) {
-	   $jmlt = do_shortcode( '[jmlt count="' . $total . '" username="' . $user . '"]' );
+		$open = '<div id="tweeter' . $args['id'] . '" class="tweeter carousel slide ticker">';
+	  if ( ! empty( $args['user'] ) ) {
+	   $jmlt = do_shortcode( '[jmlt count="' . $args['total'] . '" username="' . $args['user'] . '"]' );
 	  } else {
-$jmlt = do_shortcode( '[jmlt count="' . $total . '"]' );
+$jmlt = do_shortcode( '[jmlt count="' . $args['total'] . '"]' );
 	  }
 	  $close = '</div>';
 

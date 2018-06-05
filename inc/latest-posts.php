@@ -15,7 +15,7 @@ function latest_posts( $atts ) {
 
   ?>
   <section class="list-posts">
-	<h3><?php echo $atts['title']; ?></h3>
+	<h3><?php echo esc_html( $atts['title'] ); ?></h3>
 	<div class="row">
 	  <?php
 

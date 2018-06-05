@@ -192,7 +192,7 @@ function okfn_recaptcha_validator() {
 	  var data_2;
 	  jQuery.ajax({
 		type: "POST",
-		url: "<?php echo get_template_directory_uri(); ?>/inc/recaptcha.php",
+		url: "<?php echo esc_url( get_template_directory_uri() ); ?>/inc/recaptcha.php",
 		data: jQuery('#commentform').serialize(),
 		async: false,
 		success: function (data) {
@@ -289,6 +289,7 @@ function wp_title_for_home( $title, $sep ) {
   }
 
   if ( ( $paged >= 2 || $page >= 2 ) && ! is_404() ) {
+		// translators: %s stands for page number
 		$title = "$title $sep " . sprintf( __( 'Page %s', 'okfnwp' ), max( $paged, $page ) );
   }
 
@@ -310,7 +311,7 @@ function okfn_front_page_editor_notice() {
 		// remove_post_type_support('page', 'editor');
 		?>
 		<div class="notice notice-warning inline">
-		<p><?php _e( 'You are currently editing the page that shows your front page content.', 'okfnwp' ); ?></p>
+		<p><?php esc_html_e( 'You are currently editing the page that shows your front page content.', 'okfnwp' ); ?></p>
 		</div>
 		<?php
   }
@@ -415,6 +416,7 @@ function okfn_get_first_image_url_from_post_content() {
 add_filter( 'comment_form_submit_button', 'okfn_google_captcha' );
 
 function okfn_google_captcha( $submit_button ) {
+	wp_nonce_field( 'g-recaptcha-check', 'g-recaptcha' );
   return '<div class="g-recaptcha" data-sitekey= "' . okfn_get_recaptcha_public_key() . '"></div>' . $submit_button;
 }
 
@@ -511,7 +513,7 @@ function validate_gravatar( $id_or_email ) {
 			}
 		  wp_cache_set( $hashkey, $data, $group = '', $expire = 60 * 5 );
   }
-  if ( $data == '200' ) {
+  if ( '200' == $data ) {
 		return true;
   } else {
 		return false;
