@@ -431,18 +431,6 @@ function okfn_get_recaptcha_public_key() {
   return $recaptcha_public_key;
 }
 
-// Include custom meta tags set in Theme Options to <head>
-add_filter( 'wp_head', 'okfn_custom_meta_tags' );
-
-function okfn_custom_meta_tags() {
-
-  $theme_options = get_option( 'theme_options_option_name' );
-
-  if ( ! empty( $theme_options['okfnwp_meta'] ) ) :
-		echo wp_specialchars_decode( $theme_options['okfnwp_meta'], ENT_COMPAT );
-  endif;
-}
-
 // Remove WordPress generator meta tag to hide current WP version
 add_filter( 'the_generator', '__return_false' );
 

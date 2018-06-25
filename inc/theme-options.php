@@ -60,13 +60,6 @@ class OKFNThemeOptions {
 			'theme-options-admin' // page
 		);
 
-		add_settings_section(
-			'theme_options_setting_section_meta', // id
-			esc_html__( 'Meta Information', 'okfnwp' ), // title
-			array( $this, 'theme_options_section_meta' ), // callback
-			'theme-options-admin' // page
-		);
-
 		//        add_settings_section(
 		//            'theme_options_setting_section_wordpress', // id
 		//            __('WordPress Settings', 'okfnwp'), // title
@@ -121,14 +114,6 @@ class OKFNThemeOptions {
 			'theme_options_setting_section_social' // section
 		);
 
-		add_settings_field(
-			'okfnwp_meta', // id
-			esc_html__( 'Custom Meta Tags', 'okfnwp' ), // title
-			array( $this, 'okfnwp_meta_callback' ), // callback
-			'theme-options-admin', // page
-			'theme_options_setting_section_meta' // section
-		);
-
 		//        add_settings_field(
 		//            "okfnwp_admin_bar", // id
 		//            __('WordPress toolbar visibility', 'okfnwp'), // title
@@ -164,10 +149,6 @@ class OKFNThemeOptions {
 			$sanitary_values['okfnwp_discuss_id'] = sanitize_text_field( $input['okfnwp_discuss_id'] );
 			}
 
-		if ( isset( $input['okfnwp_meta'] ) ) {
-			$sanitary_values['okfnwp_meta'] = esc_textarea( $input['okfnwp_meta'] );
-			}
-
 		//        if (isset($input['okfnwp_admin_bar'])) {
 		//            $sanitary_values['okfnwp_admin_bar'] = $input['okfnwp_admin_bar'];
 		//        }
@@ -183,9 +164,6 @@ class OKFNThemeOptions {
 
 	  }
 
-  public function theme_options_section_meta() {
-
-	  }
 
 //    public function theme_options_section_wordpress() {
 //
