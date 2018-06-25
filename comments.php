@@ -22,6 +22,7 @@ if ( post_password_required() ) {
 
 	<h2 class="comments-title">
 	  <?php
+		  // translators: %1$s stands for number of comments and %2$s for the post title
 	  esc_html( printf( esc_html( _n( 'One thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', get_comments_number(), 'okfnwp' ) ), esc_html( number_format_i18n( get_comments_number() ) ), get_the_title() ) );
 	  ?>
 	</h2>
