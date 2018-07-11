@@ -38,7 +38,7 @@ if ( is_array( $authors ) ) :
 
 					?>
 					</h4>
-				<p><?php echo esc_html( $author_description ); ?></p>
+				<p><?php echo wp_kses_post( $author_description ); ?></p>
 			</aside>
 			<?php
 
