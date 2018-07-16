@@ -53,6 +53,13 @@ class OKFNThemeOptions {
 		//            'theme-options-admin' // page
 		//        );
 
+    add_settings_section(
+			'theme_options_setting_section_ga', // id
+			esc_html__( 'Google Analytics', 'okfnwp' ), // title
+			array( $this, 'theme_options_section_ga' ), // callback
+			'theme-options-admin' // page
+    );
+
 		add_settings_section(
 			'theme_options_setting_section_social', // id
 			esc_html__( 'Social Media', 'okfnwp' ), // title
@@ -89,6 +96,14 @@ class OKFNThemeOptions {
 		//            'theme-options-admin', // page
 		//            'theme_options_setting_section_mailing' // section
 		//        );
+
+    add_settings_field(
+			'okfnwp_ga_id', // id
+			esc_html__( 'Google Analytics Tracking ID', 'okfnwp' ), // title
+			array( $this, 'okfnwp_ga_id_callback' ), // callback
+			'theme-options-admin', // page
+			'theme_options_setting_section_ga' // section
+    );
 
 		add_settings_field(
 			'okfnwp_twitter_id', // id
@@ -137,6 +152,10 @@ class OKFNThemeOptions {
 		//            $sanitary_values['okfnwp_mailinglist_id'] = sanitize_text_field($input['okfnwp_mailinglist_id']);
 		//        }
 
+    if ( isset( $input['okfnwp_ga_id'] ) ) {
+			$sanitary_values['okfnwp_ga_id'] = sanitize_text_field( $input['okfnwp_ga_id'] );
+      }
+
 		if ( isset( $input['okfnwp_twitter_id'] ) ) {
 			$sanitary_values['okfnwp_twitter_id'] = sanitize_text_field( $input['okfnwp_twitter_id'] );
 			}
@@ -159,6 +178,10 @@ class OKFNThemeOptions {
 //    public function theme_options_section_mailing() {
 //
 //    }
+
+  public function theme_options_section_ga() {
+
+    }
 
   public function theme_options_section_social() {
 
@@ -202,9 +225,30 @@ class OKFNThemeOptions {
 //        _e('<p>For the list at http://lists.okfn.org/mailman/subscribe/XYZ, this should be XYZ</p>');
 //    }
 
+public function okfnwp_ga_id_callback() {
+  if (isset($this->theme_options['okfnwp_ga_id'])):
+    $current_val = $this->theme_options['okfnwp_ga_id'];
+  else:
+    $current_val = '';
+  endif;
+  $old_val = get_option( 'okfnwp_ga_id' );
+
+  if ( ! isset( $current_val ) && isset( $old_val ) ) :
+    $current_val = $old_val;
+    endif;
+
+  printf( '<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_ga_id]" id="okfnwp_ga_id" value="%s">', isset( $current_val ) ? esc_attr( $current_val ) : '' );
+  ?>
+  <p><?php esc_html_e( 'Google Analytics tracking ID for current website' ); ?></p>
+  <?php
+}
 
   public function okfnwp_twitter_id_callback() {
-		$current_val = $this->theme_options['okfnwp_twitter_id'];
+    if (isset($this->theme_options['okfnwp_twitter_id'])):
+      $current_val = $this->theme_options['okfnwp_twitter_id'];
+    else:
+      $current_val = '';
+    endif;
 		$old_val     = get_option( 'okfnwp_twitter_id' );
 
 		if ( ! isset( $current_val ) && isset( $old_val ) ) :
@@ -218,8 +262,12 @@ class OKFNThemeOptions {
   }
 
   public function okfnwp_fb_id_callback() {
-		$current_val = $this->theme_options['okfnwp_fb_id'];
-		$old_val     = get_option( 'okfnwp_fb_id' );
+    if (isset($this->theme_options['okfnwp_fb_id'])):
+      $current_val = $this->theme_options['okfnwp_fb_id'];
+    else:
+      $current_val = '';
+    endif;
+		$old_val = get_option( 'okfnwp_fb_id' );
 
 		if ( ! isset( $current_val ) && isset( $old_val ) ) :
 			$current_val = $old_val;
@@ -232,8 +280,12 @@ class OKFNThemeOptions {
   }
 
   public function okfnwp_discuss_id_callback() {
-		$current_val = $this->theme_options['okfnwp_discuss_id'];
-		$old_val     = get_option( 'okfnwp_discuss_id' );
+    if ($this->theme_options['okfnwp_discuss_id']):
+      $current_val = $this->theme_options['okfnwp_discuss_id'];
+    else:
+      $current_val = '';
+    endif;
+		$old_val = get_option( 'okfnwp_discuss_id' );
 
 		if ( ! isset( $current_val ) && isset( $old_val ) ) :
 			$current_val = $old_val;
@@ -242,20 +294,6 @@ class OKFNThemeOptions {
 		printf( '<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_discuss_id]" id="okfnwp_discuss_id" value="%s">', isset( $current_val ) ? esc_attr( $current_val ) : '' );
 		?>
 		<p><?php esc_html_e( 'Discuss (discuss.okfn.org) page name. If the URL to your page is https://discuss.okfn.org/c/local-groups/okbr, then use c/local-groups/okbr' ); ?></p>
-		<?php
-  }
-
-  public function okfnwp_meta_callback() {
-		$current_val = $this->theme_options['okfnwp_meta'];
-		$old_val     = get_option( 'okfnwp_meta' );
-
-		if ( ! isset( $current_val ) && isset( $old_val ) ) :
-			$current_val = $old_val;
-			endif;
-
-		printf( '<textarea cols="60" rows="10" class="regular-text" type="text" name="theme_options_option_name[okfnwp_meta]" id="okfnwp_meta">%s</textarea>', isset( $current_val ) ? esc_attr( $current_val ) : '' );
-		?>
-		<p><?php esc_html_e( 'Enter any content you would like added in the &lt;head&gt; section of every page &mdash; useful for meta tags or custom validation codes for social media and analytics services.' ); ?></p>
 		<?php
   }
 
