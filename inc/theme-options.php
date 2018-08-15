@@ -231,11 +231,6 @@ public function okfnwp_ga_id_callback() {
   else:
     $current_val = '';
   endif;
-  $old_val = get_option( 'okfnwp_ga_id' );
-
-  if ( ! isset( $current_val ) && isset( $old_val ) ) :
-    $current_val = $old_val;
-    endif;
 
   printf( '<input class="regular-text" type="text" name="theme_options_option_name[okfnwp_ga_id]" id="okfnwp_ga_id" value="%s">', isset( $current_val ) ? esc_attr( $current_val ) : '' );
   ?>
